@@ -18,6 +18,15 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          // Creates `style` nodes from JS strings
+          // Compiles Sass to CSS
+          'style-loader',
+          'css-loader',
+        ],
+      },
     ],
   },
   devServer: {
@@ -29,4 +38,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-}; 
+};

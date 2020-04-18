@@ -1,0 +1,25 @@
+.main {
+  display: grid;
+}
+
+nav {
+  background-color: rgba(70, 68, 68, 0.571);
+}
+
+.eventContainer {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.eventCard {
+  width: 280px; 
+  height: 280px;
+  background-color:white;
+  border: 1px solid rgba(211, 211, 211, 0.041);
+  margin: 5px;
+  padding: 15px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
