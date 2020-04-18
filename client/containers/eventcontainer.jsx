@@ -19,11 +19,16 @@ class EventContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Event className="eventContainer" />
-      </div>
-    );
+    const events = this.state.events.map((elm, i) => {
+      return (<Event
+        key={i}
+        name={elm.name}
+        location={elm.location}
+        date={elm.date}
+        description={elm.description}
+      />)
+    });
+    return <div>{events}</div>;
   }
 }
 
