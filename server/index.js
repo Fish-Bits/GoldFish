@@ -3,7 +3,11 @@ const app = express();
 const path = require('path');
 const port = 3000;
 
+const eventsRouter = require('./routes/eventsRouter.js')
+
+app.use('/events', eventsRouter)
 app.use(express.json());
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
