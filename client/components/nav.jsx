@@ -3,17 +3,22 @@ import React from 'react';
 const Nav = (props) => {
   const { className } = props;
   return (
-    <nav>
-      <div className="navlinks">
-        <div className="logo">
-          <h1>Sieun's Gold Fish</h1>
-        </div>
-        <div className="links">
-          <a href="#">Home</a>
-          <a href="#">Posts</a>
-        </div>
-      </div>
+    <header>
+      <span>Sieun's Gold Fish</span>
+      <nav>
+        <ul className="links">
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">Posts</a>
+          </li>
+        </ul>
       </nav>
+      <label htmlFor="searchBar">Search: </label>
+      <input type="text" name="searchBar" placeholder="search" />
+    </header>
+    // button
   );
 };
 

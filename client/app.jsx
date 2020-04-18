@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import MainContainer from './containers/maincontainer.jsx';
 import './stylesheets/app.css';
 
-export default class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      logged: 'false'
+    }
+  }
   render() {
     return (
       <div>
@@ -11,3 +17,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

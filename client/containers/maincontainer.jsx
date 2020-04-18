@@ -6,15 +6,14 @@ import EventContainer from './eventcontainer.jsx';
 class MainContainer extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
     return (
       <div className="main">
-        <Nav/>
+        <Nav />
         <div className="events">
-        <EventContainer />
+          <EventContainer />
         </div>
       </div>
     );

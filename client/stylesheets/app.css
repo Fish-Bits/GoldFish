@@ -2,9 +2,22 @@
   display: grid;
 }
 
-nav {
+header {
   background-color: rgba(70, 68, 68, 0.571);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
 }
+li {
+    list-style: none;
+  display: inline-block;
+  padding: 0px 20px;
+}
+/* .links { */
+/* display: inline-block; */
+
+/* } */
 
 .eventContainer {
   display: grid;
@@ -12,9 +25,9 @@ nav {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 .eventCard {
-  width: 280px; 
+  width: 280px;
   height: 280px;
-  background-color:white;
+  background-color: white;
   border: 1px solid rgba(211, 211, 211, 0.041);
   margin: 5px;
   padding: 15px 15px;
