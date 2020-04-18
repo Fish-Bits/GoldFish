@@ -9,10 +9,14 @@ class EventContainer extends Component {
       events: [],
     };
   }
-  // componentDidMount(){
-  //   axios.get('/events')
-  //   .then(())
-  // }
+  componentDidMount() {
+    axios.get('/events').then((response) => {
+      // console.log(response.data);
+      console.log(response.data[0]);
+      this.setState({ events: response.data });
+      console.log(this.state);
+    });
+  }
 
   render() {
     return (
