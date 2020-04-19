@@ -2,11 +2,15 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const port = 3000;
+const passportSetup = require('./config/passport-setup')
+const authRoutes = require('./routes/auth-routes')
 
 app.use(express.json());
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
+
+app.use('/auth',authRoutes)
 
 app.use((err, req, res, next) => {
   const defaultErr = {

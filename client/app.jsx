@@ -5,6 +5,7 @@ export default class App extends Component {
     return (
       <div>
         <h1>Hi, this is Sieun</h1>
+        <a className="google-btn" href="/auth/google"> Google+</a>
       </div>
     );
   }

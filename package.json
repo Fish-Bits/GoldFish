@@ -26,6 +26,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.0.2",
     "react": "^16.13.1",
     "react-datepicker": "^2.14.1",
