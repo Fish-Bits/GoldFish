@@ -6,6 +6,13 @@ import EventContainer from './eventcontainer.jsx';
 class MainContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      addButton: 'false',
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(e){
+    this.setState({addButton: 'true'});
   }
 
   render() {
