@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import Nav from '../components/nav.jsx';
-import EventContainer from './eventcontainer.jsx';
+import EventContainer from './EventContainer.jsx';
 
 class MainContainer extends Component {
   constructor(props) {

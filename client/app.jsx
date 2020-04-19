@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import MainContainer from './containers/maincontainer.jsx';
-import './stylesheets/app.css';
-
+import React, { Component, Fragment } from 'react';
+import Header from './components/header.jsx';
+import Events from './containers/events.jsx'
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logged: 'false'
-    }
+      logged: 'false',
+    };
   }
   render() {
     return (
-      <div>
-        <MainContainer />
-      </div>
+      <Fragment>
+        <Header />
+        <Events />
+      </Fragment>
     );
   }
 }
