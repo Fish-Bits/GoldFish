@@ -2,10 +2,21 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const port = 3000;
-const passportSetup = require('./config/passport-setup')
-const authRoutes = require('./routes/auth-routes')
+const passport = require('passport')
+const passportSetup = require('./config/passport-setup');
+const cookieSession = require('cookie-session');
+require('dotenv').config();
 
-const eventsRouter = require('./routes/eventsRouter.js')
+const authRoutes = require('./routes/auth-routes');
+const eventsRouter = require('./routes/eventsRouter.js');
+
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000, //day
+  keys: [process.env.COOKIEKEY]
+}))
+
+app.use(passport.initialize()); //initialize passport
+app.use(passport.session()); //use cookie session
 
 app.use('/events', eventsRouter)
 app.use(express.json());
@@ -14,7 +25,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-app.use('/auth',authRoutes)
+
+app.use('/auth',authRoutes);
 
 app.use((err, req, res, next) => {
   const defaultErr = {

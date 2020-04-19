@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport')
-// const db = require('../models/queries')
 
 // router.post('/', db.getUserById, (req, res) => {
 //   res.status(200).json({ username: res.locals.username, userId: res.locals.userId, success: true})
@@ -10,7 +9,8 @@ const passport = require('passport')
 //auth logout
 router.get('/logout', (req, res)=> {
   //handle with passport 
-  res.send('logging out')
+  res.logout()
+  res.redirect('/')
 })
 
 //auth with google
@@ -25,7 +25,7 @@ router.get('/google', passport.authenticate('google', {
 // passport sees the code query string and exchange the code with google profile information 
 // before moving on to the last middle ware that sends response, the callback function in passport-setup will be executed
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.send('you reached the callback URI')
+  res.redirect('/')
 })
 
 module.exports = router;
