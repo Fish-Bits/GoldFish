@@ -74,10 +74,7 @@ eventsControllers.updatePost = async (req, res, next) => {
   try {
     const text = 'UPDATE events SET name = $1, location = $2, date = $3, description = $4, user_id = $5 WHERE id = $6';
     const body = [name, location, date, description, user_id, id];
-    console.log('body: ', body);
     const result = await db.query(text, body);
-    console.log('text: ', text);
-    console.log('result:', result)
     res.locals.updatePost = result.rows;
     next();
   }
