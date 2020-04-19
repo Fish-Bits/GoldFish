@@ -7,7 +7,6 @@ require('dotenv').config();
 //move on to serializer
 //send user id to the next method for cookies
 passport.serializeUser((user, done) => {
-  console.log('usere serializer', user)
   done(null, user.id)
 })
 
@@ -16,7 +15,6 @@ passport.deserializeUser((id, done) => {
   const findUserByIdQuery = `SELECT * FROM users WHERE id = $1;`
   db.query(findUserByIdQuery, [id])
     .then(user => {
-      console.log('deserializeUser', user)
       done(null, user);
     })
 })
@@ -35,16 +33,12 @@ passport.use(
       console.log(result.rows)
       if(result.rows.length > 0){
         const user = result.rows[0]
-        console.log('user is ', user)
         done(null, user)
       } else {
         //create user in db
         let createUserQuery = `INSERT INTO users (username, google_id) VALUES ($1, $2) RETURNING *`
         db.query(createUserQuery, [profile.name.givenName + profile.name.familyName, profile.id])
           .then(user => {
-            console.log('user',user)
-
-            console.log('new user created' + user.rows[0]);
             done(null, user.rows[0])
           })
       }
