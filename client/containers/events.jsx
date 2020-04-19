@@ -3,6 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import Event from '../components/event.jsx';
 const axios = require('axios');
 
+const styles = {
+  Paper: {padding:20, marginTop: 10, marginBottom: 10}
+}
+
 class Events extends Component {
   constructor(props) {
     super(props);
@@ -20,17 +24,18 @@ class Events extends Component {
   }
   render() {
     return (
-      <Grid container>
-      {this.state.events.map((event) => {
+      <Grid container sm={12}>
+        {this.state.events.map((event, i) => {
           return (
-            <Grid item sm>
               <Event
+                styles={styles.Paper}
+                key={i}
                 name={event.name}
                 location={event.location}
                 date={event.date}
                 description={event.description}
               />
-            </Grid>
+            
           );
         })}
       </Grid>
