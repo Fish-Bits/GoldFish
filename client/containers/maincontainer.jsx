@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
+import ChatWindow from './chatWindow.js';
 import Nav from '../components/nav.jsx';
 import EventContainer from './eventcontainer.jsx';
 
@@ -21,6 +22,7 @@ class MainContainer extends Component {
         <Nav />
         <div className="events">
           <EventContainer />
+          <ChatWindow />
         </div>
       </div>
     );

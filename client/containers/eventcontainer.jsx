@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Event from '../components/event.jsx';
+import ChatWindow from './chatWindow.js';
 const axios = require('axios');
 
 class EventContainer extends Component {
@@ -23,7 +24,7 @@ class EventContainer extends Component {
       return (<Event
         key={i}
         name={elm.name}
-        location={elm.location}
+        location={elm.location} 
         date={elm.date}
         description={elm.description}
       />)
