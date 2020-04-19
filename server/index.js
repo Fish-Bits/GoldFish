@@ -5,7 +5,11 @@ const port = 3000;
 const passportSetup = require('./config/passport-setup')
 const authRoutes = require('./routes/auth-routes')
 
+const eventsRouter = require('./routes/eventsRouter.js')
+
+app.use('/events', eventsRouter)
 app.use(express.json());
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
