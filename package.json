@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/Fish-Bits/GoldFish#readme",
   "dependencies": {
+    "@material-ui/core": "^4.9.11",
+    "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "cookie-session": "^1.4.0",
@@ -41,6 +43,7 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.2",
+    "file-loader": "^6.0.0",
     "nodemon": "^2.0.3",
     "style-loader": "^1.1.4",
     "webpack": "^4.42.1",

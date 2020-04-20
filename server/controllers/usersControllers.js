@@ -25,7 +25,7 @@ usersControllers.createUser = (req, res, next) => {
 
 usersControllers.verifyUser = (req, res, next) => {
   const query = `SELECT * FROM users WHERE username = $1;`
-  pool.query(query, [req.body.username])
+  db.query(query, [req.body.username])
     .then(result => {
       const user = result.rows[0]
       res.locals.username = user.username

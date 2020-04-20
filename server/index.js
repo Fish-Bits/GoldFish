@@ -38,9 +38,13 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.get('/*', function(req, res) {
+app.get('/login', function(req, res) {
   res.sendFile(path.join(__dirname, '../index.html'));
 })
+app.get('/home', function(req, res) {
+  res.sendFile(path.join(__dirname, '../index.html'));
+})
+
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);

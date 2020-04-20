@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport')
+const usersControllers = require('../controllers/usersControllers')
 
 // router.post('/', db.getUserById, (req, res) => {
 //   res.status(200).json({ username: res.locals.username, userId: res.locals.userId, success: true})
@@ -12,6 +13,11 @@ router.get('/logout', (req, res)=> {
   res.logout()
   res.redirect('/')
 })
+
+router.post('/login', usersControllers.verifyUser, (req, res) => {
+  res.status(200).json({ username: res.locals.username, userId: res.locals.userId, success: true})
+})
+
 
 //auth with google
 //we want passport to take control to interact with google and send user to consent screen 
@@ -25,7 +31,7 @@ router.get('/google', passport.authenticate('google', {
 // passport sees the code query string and exchange the code with google profile information 
 // before moving on to the last middle ware that sends response, the callback function in passport-setup will be executed
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('/')
+  res.redirect('/home')
 })
 
 module.exports = router;

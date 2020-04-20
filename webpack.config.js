@@ -37,7 +37,7 @@ module.exports = {
     publicPath: '/build',
     proxy: {
       '/': 'http://localhost:3000',
-      '/login': 'http://localhost:3000',
+      '/auth': 'http://localhost:3000',
     },
   },
   resolve: {
