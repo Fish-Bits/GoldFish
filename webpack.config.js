@@ -1,11 +1,14 @@
 const path = require('path');
+require('dotenv').config();
+
 module.exports = {
   entry: './client/index.js',
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
-  mode: process.NODE_ENV,
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -30,12 +33,16 @@ module.exports = {
     ],
   },
   devServer: {
+    historyApiFallback: true,
     publicPath: '/build',
     proxy: {
       '/': 'http://localhost:3000',
+      '/auth': 'http://localhost:3000',
     },
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
 };
+
+

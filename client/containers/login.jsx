@@ -13,19 +13,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -59,6 +46,36 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const classes = useStyles();
+  const doLogin = () => {
+    if(!values.username) return
+    if(!values.password) return
+    fetch('/auth/login', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: values.username,
+        password: values.password
+      })
+    })
+    .then(response => response.json())
+    .then(result => {
+      if(result && result.success){
+        console.log('success')
+      }
+    })
+  }
+
+  const [values, setValues] = React.useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -78,11 +95,12 @@ const Login = (props) => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
+              onChange={handleChange('username')}
             />
             <TextField
               variant="outlined"
@@ -94,20 +112,22 @@ const Login = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange('password')}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              onClick={doLogin}
               className={classes.submit}
             >
               Sign In
             </Button>
+
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -121,8 +141,11 @@ const Login = (props) => {
               </Grid>
             </Grid>
             <Box mt={5}>
-              <Copyright />
+              <Link href="/auth/google">
+                Google
+              </Link>
             </Box>
+
           </form>
         </div>
       </Grid>
