@@ -1,11 +1,14 @@
 const path = require('path');
+require('dotenv').config();
+
 module.exports = {
   entry: './client/index.js',
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
-  mode: process.NODE_ENV,
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -28,22 +31,28 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          }
-        ]
-      }
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
+        include: path.join(__dirname, 'client'),
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader',
+        include: path.join(__dirname, 'client/images')
+      },
     ],
   },
   devServer: {
+    historyApiFallback: true,
     publicPath: '/build',
     proxy: {
       '/': 'http://localhost:3000',
+      '/auth': 'http://localhost:3000',
     },
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
 };
+
+

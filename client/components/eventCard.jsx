@@ -16,10 +16,12 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
-import ChatIcon from '@material-ui/icons/Chat';
-// import ChatWindow from '../containers/chatWindow';
+// import ChatIcon from '@material-ui/icons/Chat';
 // import Store from '../containers/Store.js';
 import ChatWindow2 from '../containers/chatWindow2';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import AddCommentIcon from '@material-ui/icons/AddComment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,62 +57,59 @@ const EventCard = (props) => {
 
   return (
     <Grid item md={3}>
-    <Card elevation={3} className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={name}
-        subheader={date}
-      />
-      <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      />
-
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Card elevation={3} className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              R
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={name}
+          subheader={date}
+        />
+        <CardMedia
+          className={classes.media}
+          image=""
+          title=""
+        />
         <CardContent>
-          <div className='App'>
-            <ChatWindow2 />
-          </div>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
         </CardContent>
-      </Collapse>
-    </Card>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <div className='App'>
+              <ChatWindow2 />
+            </div>
+          </CardContent>
+        </Collapse>
+        <CardActions disableSpacing>
+          <IconButton aria-label="Attending">
+            <CheckIcon />
+          </IconButton>
+          <IconButton aria-label="notAttending">
+            <CloseIcon />
+          </IconButton>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
     </Grid>
   );
-}
+};
 
 export default EventCard;
-

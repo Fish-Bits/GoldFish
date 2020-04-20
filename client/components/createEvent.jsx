@@ -18,13 +18,13 @@ class createEvent extends Component {
     const value = e.target.value;
     this.setState({name: value});
   }
-  // handleSubmit(){
-  //   axios.post('/event/:id').then((response) => {
-  //     if(response.ok){
+  handleSubmit(){
+    axios.post('/event/:id').then((response) => {
+      if(response.ok){
         
-  //     }
-  //   })
-  // }
+      }
+    })
+  }
   render() {
     const {name, date, description, location} = this.state;
     return (
