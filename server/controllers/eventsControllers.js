@@ -8,7 +8,6 @@ eventsControllers.getEvents = async (req, res, next) => {
   try{
     const text = `SELECT * FROM events`;
     const result = await db.query(text);
-    console.log(result);
 
     // loop through each event
     for (let i = 0; i < result.rows.length; i++) {
@@ -56,7 +55,6 @@ eventsControllers.getDetails = async (req, res, next) => {
 
 eventsControllers.createPost = async (req, res, next) => {
   const { name, location, date, description, user_id } = req.body;
-  console.log('req.body', req.body)
   // const name = 'Brian';
   // const location = 'Brians house';
   // const date = '2020-04-18';
@@ -91,10 +89,7 @@ eventsControllers.updatePost = async (req, res, next) => {
   try {
     const text = 'UPDATE events SET name = $1, location = $2, date = $3, description = $4, user_id = $5 WHERE id = $6';
     const body = [name, location, date, description, user_id, id];
-    console.log('body: ', body);
     const result = await db.query(text, body);
-    console.log('text: ', text);
-    console.log('result:', result)
     res.locals.updatePost = result.rows;
     next();
   }
@@ -106,6 +101,41 @@ eventsControllers.updatePost = async (req, res, next) => {
     });
   }
 };
+
+eventsControllers.getComment = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const text = `SELECT * FROM comments WHERE id = $1`;
+    const params = [id];
+    const result = await db.query(text, params);
+    res.locals.getComment = result.rows[0];
+    next();
+  }
+  catch(err){
+    next({
+      log: `eventsControllers.getComment: error: ${err}`,
+      message: { err: `Error in eventsControllers.getComment: ${err}`}
+    });
+  }
+}
+
+eventsControllers.createComment = async (req, res, next) => {
+  const { user_id, comment } = req.body;
+  const { id } = req.params;
+  try {
+    const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3)`;
+    const params = [user_id, id, comment]
+    const result = await db.query(text, params);
+    res.locals.createComment = result.rows;
+    next();
+  }
+  catch(err) {
+    next({
+      log: `events.Controller.createComment: error: ${err}`,
+      message: { err: `Error in eventsControllers.createComment: ${err}`}
+    })
+  }
+}
 
 eventsControllers.deletePost = async (req, res, next) => {
   const { id } = req.params
