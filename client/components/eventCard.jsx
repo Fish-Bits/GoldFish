@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const eventCard = (props) => {
+const EventCard = (props) => {
+  const { name, date, description, location, styles } = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -48,7 +50,8 @@ const eventCard = (props) => {
   };
 
   return (
-    <Card className={classes.root}>
+    <Grid item md={3}>
+    <Card elevation={3} className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -60,8 +63,8 @@ const eventCard = (props) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={name}
+        subheader={date}
       />
       <CardMedia
         className={classes.media}
@@ -70,8 +73,7 @@ const eventCard = (props) => {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -120,7 +122,8 @@ const eventCard = (props) => {
         </CardContent>
       </Collapse>
     </Card>
+    </Grid>
   );
 }
 
-export default eventCard;
+export default EventCard;
