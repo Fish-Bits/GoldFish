@@ -1,3 +1,5 @@
-/* body {
-  background-image: url('../images/iStock-504085304.jpg');
-} */
+
+.auth-button {
+  display: flex;
+  justify-content: center;
+}
