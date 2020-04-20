@@ -21,14 +21,17 @@ class EventContainer extends Component {
 
   render() {
     const events = this.state.events.map((elm, i) => {
-      return (<Event
+      return (<div>
+      <Event
         key={i}
         name={elm.name}
         location={elm.location} 
         date={elm.date}
         description={elm.description}
-      />)
-    });
+      />
+      <ChatWindow />
+      </div>
+    )});
     return <div>{events}</div>;
   }
 }

@@ -87,6 +87,41 @@ eventsControllers.updatePost = async (req, res, next) => {
   }
 };
 
+eventsControllers.getComment = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const text = `SELECT * FROM comments WHERE id = $1`;
+    const params = [id];
+    const result = db.query(text, params);
+    res.locals.getComment = result.rows;
+    next();
+  }
+  catch(err){
+    next({
+      log: `eventsControllers.getComment: error: ${err}`,
+      message: { err: `Error in eventsControllers.getComment: ${err}`}
+    });
+  }
+}
+
+eventsControllers.createComment = async (req, res, next) => {
+  const { user_id, event_id, comment } = req.body;
+  const { id } = req.params;
+  try {
+    const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3) WHERE id=$4`;
+    const params = [user_id, event_id, comment, id]
+    const result = await db.query(text, params);
+    res.locals.createComment = result.rows;
+    next();
+  }
+  catch(err) {
+    next({
+      log: `events.Controller.createComment: error: ${err}`,
+      message: { err: `Error in eventsControllers.createComment: ${err}`};
+    })
+  }
+}
+
 eventsControllers.deletePost = async (req, res, next) => {
   const { id } = req.params
   try{

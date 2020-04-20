@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Launcher} from 'react-chat-window'
+import Sticker from '../assets/GoldfishSticker.jpg';
  
 class ChatWindow extends Component {
  
@@ -12,8 +13,11 @@ class ChatWindow extends Component {
  
   _onMessageWasSent(message) {
     this.setState({
-      messageList: [...this.state.messageList, message]
+      messageList: [...this.state.messageList, message],
     })
+
+    // axios.post('/:id/comment', message)
+    // .then(res => console.log(res.data))
   }
  
   _sendMessage(text) {
@@ -32,8 +36,8 @@ class ChatWindow extends Component {
     return (<div>
       <Launcher
         agentProfile={{
-          teamName: 'react-chat-window',
-          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+          teamName: 'Fish Bits ChitChats',
+          imageUrl: <img src={Sticker}/>
         }}
         onMessageWasSent={this._onMessageWasSent.bind(this)}
         messageList={this.state.messageList}
