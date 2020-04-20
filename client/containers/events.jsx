@@ -44,6 +44,7 @@ class Events extends Component {
                 location={event.location}
                 date={event.date.substring(0,10)}
                 description={event.description}
+                deleteEvent={this.deleteEvent}
               />
           );
         })}
