@@ -3,10 +3,12 @@ body, html {
   }
   .bg {
   background-image: url("../assets/iStock-504085304.jpg");
-   /* height: 100vh; */
-   /* background-position: inherit; */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  
   }
+
+.auth-button {
+  display: flex;
+  justify-content: center;
+}

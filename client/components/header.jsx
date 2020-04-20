@@ -11,21 +11,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Header = (props) => {
+const Header = () => {
   const classes = useStyles();
-
   return (
     <div>
-     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">FishBits</a>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a className="navbar-brand" href="#">FishBits</a>    
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
-            {/* <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li> */}
             <li className="nav-item">
               <Link to="/create" className="nav-link">New Event</Link>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/">Log Out</a>
+            </li>
           </ul>
+        </div>
       </nav>
       <WaveBorder
         upperColor="#333a3f"
@@ -36,6 +37,4 @@ const Header = (props) => {
     </div>
   );
 }
-
-
 export default Header;

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import {CTX} from './Store.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,19 +36,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function chatWindow2() {
   const classes = useStyles();
-  // const [allChats] = React.useContext(CTX);
-  // console.log({allChats})
 
-  const [textValue, changeTextValue] = React.useState('');
+  const [chat, changeTextValue] = React.useState({
+    textValue: '',
+    messages: [{from: 'Brianna', msg: ' hello'}]
+  });
+
+  const handleMessageSend = () => {
+    chat.messages.push({from: 'Sieun', msg: chat.textValue})
+
+    changeTextValue({...chat, textValue: ''})
+  }
+
   return (
     <div style={{ width: '50%' }}>
       <div className={classes.root}>
-        <div className={classes.chatWindow}>
+        <div className={classes.chatWindow} >
           {
-            [{from: 'user', msg: ' hello'}].map((chat, i) => (
+            chat.messages.map((chat, i) => (
               <div className={classes.flex} key={i} >
                 <Chip label={chat.from} className={classes.chip} icon={<FaceIcon />}/>
-                <Typography variant='p' gutterBottom>{chat.msg}</Typography> 
+                <Typography variant="body2" color="textSecondary" component="p">{chat.msg}</Typography> 
               </div>
             ))
           }
@@ -61,12 +68,14 @@ export default function chatWindow2() {
             label="Say anything :)"
             multiline
             rowsMax={4}
-            value={textValue}
-            onChange={e => changeTextValue(e.target.value)}
+            value={chat.textValue}
+            onChange={e => {
+              changeTextValue({...chat, textValue: e.target.value})
+            }}
           />
           <br></br>
           <br></br>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={()=> handleMessageSend()}>
             Send
           </Button>
         </div>

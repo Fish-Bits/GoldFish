@@ -13,20 +13,14 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
-import ChatWindow2 from '../containers/chatWindow2';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
 import party from '../assets/shutterstock_199419065.jpg';
-import python from '../assets/python-7be70baaac.png';
+import ChatWindow2 from '../containers/chatWindow2';
+import CounterButton from './counterButton';
 
 const randomColor = Math.floor(Math.random()*16777215).toString(16);
 const useStyles = makeStyles((theme) => ({
   root: {
-    // opacity: 0.8,
-    // marginTop: 10,
-    // marginLeft: 'auto',
     margin: 'auto',
-    // color: '#FFFFFF',
     maxWidth: 345,
     backgroundColor: 'rgba(255,255,255, 0.85)',
     alignItems: 'center'
@@ -49,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#" + randomColor,
   },
 }));
-// const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+
 const EventCard = (props) => {
   const { name, date, description, location, image} = props;
   const classes = useStyles();
@@ -91,7 +85,7 @@ const EventCard = (props) => {
             {description}
           </Typography>
         </CardContent>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" mountOnExit>
           <CardContent>
             <div className='App'>
               <ChatWindow2 />
@@ -99,12 +93,7 @@ const EventCard = (props) => {
           </CardContent>
         </Collapse>
         <CardActions disableSpacing>
-          <IconButton aria-label="Attending">
-            <CheckIcon />
-          </IconButton>
-          <IconButton aria-label="notAttending">
-            <CloseIcon />
-          </IconButton>
+          <CounterButton />
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
