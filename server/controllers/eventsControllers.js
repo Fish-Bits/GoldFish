@@ -78,11 +78,6 @@ eventsControllers.createPost = async (req, res, next) => {
 eventsControllers.updatePost = async (req, res, next) => {
   const { name, location, date, description, user_id } = req.body; // req.body comes from client and when user submits, fetch arrives from client with data
   const { id } = req.params;
-  // const name = 'Brian';
-  // const location = 'Brians house';
-  // const date = '2020-04-18';
-  // const description = 'party';
-  // const user_id = 1;
 
   try {
     const text = 'UPDATE events SET name = $1, location = $2, date = $3, description = $4, user_id = $5 WHERE id = $6';
