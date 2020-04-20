@@ -10,29 +10,26 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
-// import ChatIcon from '@material-ui/icons/Chat';
-// import Store from '../containers/Store.js';
 import ChatWindow2 from '../containers/chatWindow2';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
-// import AddCommentIcon from '@material-ui/icons/AddComment';
-// import grey from '@material-ui/core/colors/grey';
-// // import white from '@material-ui/core/colors/white';
-// import { fade } from '@material-ui/core/styles/colorManipulator';
-// const color = grey[50];
+import party from '../assets/shutterstock_199419065.jpg';
+import python from '../assets/python-7be70baaac.png';
 
+const randomColor = Math.floor(Math.random()*16777215).toString(16);
 const useStyles = makeStyles((theme) => ({
   root: {
     // opacity: 0.8,
-    marginTop: 10,
+    // marginTop: 10,
+    // marginLeft: 'auto',
+    margin: 'auto',
     // color: '#FFFFFF',
     maxWidth: 345,
+    backgroundColor: 'rgba(255,255,255, 0.85)',
+    alignItems: 'center'
   },
   media: {
     height: 0,
@@ -49,12 +46,12 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: "#" + randomColor,
   },
 }));
-
+// const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
 const EventCard = (props) => {
-  const { name, date, description, location, styles } = props;
+  const { name, date, description, location, image} = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -67,8 +64,7 @@ const EventCard = (props) => {
       <Card elevation={3} className={classes.root}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+            <Avatar aria-label="recipe" style={{backgroundColor: "#" + randomColor}}>
             </Avatar>
           }
           action={
@@ -76,16 +72,22 @@ const EventCard = (props) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={name}
-          subheader={date}
+          title={<Typography variant="h5" style={{fontFamily: 'Merriweather'}}> {name} </Typography>}
+          subheader={<Typography variant="subtitle1" style={{fontFamily: 'Merriweather'}}> {date} </Typography>}
         />
         <CardMedia
           className={classes.media}
-          image=""
+          image={party}
           title=""
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="h6" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+            {location}
+          </Typography>
+          <Typography variant="subtitle2" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+            Description:
+          </Typography>
+          <Typography variant="body2" style={{fontFamily: 'Merriweather'}} color="black" component="p">
             {description}
           </Typography>
         </CardContent>

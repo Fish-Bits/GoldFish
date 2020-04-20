@@ -39,7 +39,7 @@ class createEvent extends Component {
           <label htmlFor="description">Description: </label>
           <textarea type="description" name="description" onChange={this.onChange} value={description} required/>
         </article>
-        <input type="submit" value="Submit" onClick={this.onClick}/>
+        <input type="submit" value="Submit" onClick={this.handleSubmit}/>
       </div>
     );
     }

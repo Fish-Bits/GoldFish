@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Header from './components/header.jsx';
 import Events from './containers/events.jsx';
+import './stylesheets/app.css';
 
 class App extends Component {
   constructor(props) {
@@ -11,10 +12,10 @@ class App extends Component {
   }
   render() {
     return (
-      <Fragment>
+      <div className="bg">
         <Header />
         <Events />
-        </Fragment>
+      </div>
     );
   }
 }
