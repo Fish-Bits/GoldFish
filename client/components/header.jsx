@@ -21,29 +21,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-
-  // return (
-  //   <div className={classes.root}>
-  //     <AppBar position="static">
-  //       <Toolbar>
-  //         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-  //           <MenuIcon />
-  //         </IconButton>
-  //         <Typography variant="h6" className={classes.title}>
-  //           Home
-  //         </Typography>
-  //         <Typography variant="h6" className={classes.title}>
-  //           Events
-  //         </Typography>
-  //         <Typography variant="h6" className={classes.title}>
-  //           Add Post
-  //         </Typography>
-  //         <Button color="inherit">Login</Button>
-  //       </Toolbar>
-  //     </AppBar>
-  //   </div>
-  // );
-
+  const handleClick = () => {
+    // <Link>
+    // //to createEvent component
+    // </Link>
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <a className="navbar-brand" href="#">FishBits</a>

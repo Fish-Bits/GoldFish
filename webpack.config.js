@@ -27,6 +27,16 @@ module.exports = {
           'css-loader',
         ],
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
+        include: path.join(__dirname, 'client'),
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader',
+        include: path.join(__dirname, 'client/images')
+      },
     ],
   },
   devServer: {
