@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
 
 
 app.use('/auth',authRoutes);
+app.get('/create',(req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
 
 app.use((err, req, res, next) => {
   const defaultErr = {
