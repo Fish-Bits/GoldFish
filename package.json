@@ -25,11 +25,13 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
+    "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pg": "^8.0.2",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1"
   },
