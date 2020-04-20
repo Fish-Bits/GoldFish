@@ -20,6 +20,17 @@ router.post('/',
     res.status(200).json(res.locals.createPost);
 })
 
+router.get('/:id/comment',
+  eventsControllers.getComment, (req, res) => {
+    res.status(200).json(res.locals.getComment);
+})
+
+router.post('/:id/comment',
+  eventsControllers.createComment, (req, res) => {
+    res.status(200).json(res.locals.createComment);
+    res.status(200).json('hello');
+})
+
 router.put('/:id',
   eventsControllers.updatePost, (req, res) => {
     res.status(200).json(res.locals.updatePost);

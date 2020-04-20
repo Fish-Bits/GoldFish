@@ -29,14 +29,12 @@ class Events extends Component {
         {this.state.events.map((event, i) => {
           return (
               <EventCard
-                styles={styles.Paper}
                 key={i}
                 name={event.name}
                 location={event.location}
                 date={event.date.substring(0,10)}
                 description={event.description}
               />
-            
           );
         })}
       </Grid>

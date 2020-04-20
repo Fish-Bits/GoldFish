@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import WaveBorder from '../material-ui/wave.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  waveBorder: {
+    paddingTop: theme.spacing(4)
+  }
 }));
+
 
 const Header = (props) => {
   const classes = useStyles();
@@ -27,6 +32,26 @@ const Header = (props) => {
     // </Link>
   }
   return (
+    // <div className={classes.root}>
+    //   <AppBar position="static">
+    //     <Toolbar>
+    //       <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+    //         <MenuIcon />
+    //       </IconButton>
+    //       <Typography variant="h6" className={classes.title}>
+    //         Home
+    //       </Typography>
+    //       <Typography variant="h6" className={classes.title}>
+    //         Events
+    //       </Typography>
+    //       <Typography variant="h6" className={classes.title}>
+    //         Add Post
+    //       </Typography>
+    //       <Button color="inherit">Login</Button>
+    //     </Toolbar>
+    //   </AppBar>
+    // </div>
+    <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <a className="navbar-brand" href="#">FishBits</a>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +71,13 @@ const Header = (props) => {
     </ul>
   </div>
 </nav>
+  <WaveBorder
+        upperColor="#333a3f"
+        lowerColor="#FFFFFF"
+        className={classes.waveBorder}
+        animationNegativeDelay={3}
+      />
+    </div>
   );
 }
 

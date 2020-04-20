@@ -16,17 +16,22 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
+// import ChatIcon from '@material-ui/icons/Chat';
+// import Store from '../containers/Store.js';
+import ChatWindow2 from '../containers/chatWindow2';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
-import AddCommentIcon from '@material-ui/icons/AddComment';
-import grey from '@material-ui/core/colors/grey';
-
+// import AddCommentIcon from '@material-ui/icons/AddComment';
+// import grey from '@material-ui/core/colors/grey';
+// // import white from '@material-ui/core/colors/white';
+// import { fade } from '@material-ui/core/styles/colorManipulator';
 // const color = grey[50];
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: 'transparent !important',
-    color: '#FFFFFF',
+    // opacity: 0.8,
+    marginTop: 10,
+    // color: '#FFFFFF',
     maxWidth: 345,
   },
   media: {
@@ -58,7 +63,7 @@ const EventCard = (props) => {
   };
 
   return (
-    <Grid item md={3}>
+    <Grid item md={3} >
       <Card elevation={3} className={classes.root}>
         <CardHeader
           avatar={
@@ -76,14 +81,21 @@ const EventCard = (props) => {
         />
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/paella.jpg"
-          title="Paella dish"
+          image=""
+          title=""
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             {description}
           </Typography>
         </CardContent>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <div className='App'>
+              <ChatWindow2 />
+            </div>
+          </CardContent>
+        </Collapse>
         <CardActions disableSpacing>
           <IconButton aria-label="Attending">
             <CheckIcon />
@@ -91,10 +103,6 @@ const EventCard = (props) => {
           <IconButton aria-label="notAttending">
             <CloseIcon />
           </IconButton>
-          <IconButton aria-label="AddComment">
-            <AddCommentIcon />
-          </IconButton>
-
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
@@ -106,38 +114,6 @@ const EventCard = (props) => {
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron
-              and set aside for 10 minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-              over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-              stirring occasionally until lightly browned, 6 to 8 minutes.
-              Transfer shrimp to a large plate and set aside, leaving chicken
-              and chorizo in the pan. Add pimentón, bay leaves, garlic,
-              tomatoes, onion, salt and pepper, and cook, stirring often until
-              thickened and fragrant, about 10 minutes. Add saffron broth and
-              remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes
-              and peppers, and cook without stirring, until most of the liquid
-              is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
-              reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is
-              just tender, 5 to 7 minutes more. (Discard any mussels that don’t
-              open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then
-              serve.
-            </Typography>
-          </CardContent>
-        </Collapse>
       </Card>
     </Grid>
   );
