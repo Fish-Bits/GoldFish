@@ -50,7 +50,7 @@ const Header = (props) => {
         upperColor="#4053af"
         lowerColor="#FFFFFF"
         className={classes.waveBorder}
-        animationNegativeDelay={2}
+        animationNegativeDelay={3}
       />
     </div>
   );
