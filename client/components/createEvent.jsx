@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 
 class createEvent extends Component {
   constructor(props) {
@@ -52,8 +52,7 @@ class createEvent extends Component {
     }
 
     axios.post('/events/', event)
-    .then(res => console.log(res.data));
-    window.location = '/home'
+    .then(()=> {window.location = '/home'})
   }
   render() {
     return (
