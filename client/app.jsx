@@ -19,7 +19,6 @@ class App extends Component {
     return (
       <Fragment>
         <Header />
-        {/* <Login /> */}
         <Events />
       </Fragment>
     );

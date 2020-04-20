@@ -1,5 +1,4 @@
 const db = require('../models/eventsModels.js');
-require('dotenv').config();
 
 const eventsControllers = {};
 
