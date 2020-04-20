@@ -21,27 +21,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-
+  const handleClick = () => {
+    // <Link>
+    // //to createEvent component
+    // </Link>
+  }
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Home
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            Events
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            Add Post
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a className="navbar-brand" href="#">FishBits</a>
+  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+  <div className="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul className="navbar-nav">
+      <li className="nav-item active">
+        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Posts</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Add Event</a>
+      </li>
+    </ul>
+  </div>
+</nav>
   );
 }
 

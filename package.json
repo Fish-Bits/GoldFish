@@ -25,6 +25,7 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
+    "bootstrap": "^4.4.1",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -33,6 +34,7 @@
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.0.2",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2"
@@ -46,6 +48,7 @@
     "file-loader": "^6.0.0",
     "nodemon": "^2.0.3",
     "style-loader": "^1.1.4",
+    "url-loader": "^4.1.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
