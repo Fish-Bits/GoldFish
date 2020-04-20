@@ -10,22 +10,20 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
-// import ChatIcon from '@material-ui/icons/Chat';
+import party from '../assets/shutterstock_199419065.jpg';
 import ChatWindow2 from '../containers/chatWindow2';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
-import AddCommentIcon from '@material-ui/icons/AddComment';
 import CounterButton from './counterButton';
 
+const randomColor = Math.floor(Math.random()*16777215).toString(16);
 const useStyles = makeStyles((theme) => ({
   root: {
+    margin: 'auto',
     maxWidth: 345,
+    backgroundColor: 'rgba(255,255,255, 0.85)',
+    alignItems: 'center'
   },
   media: {
     height: 0,
@@ -42,12 +40,12 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: "#" + randomColor,
   },
 }));
 
 const EventCard = (props) => {
-  const { name, date, description, location, styles } = props;
+  const { name, date, description, location, image} = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -56,12 +54,11 @@ const EventCard = (props) => {
   };
 
   return (
-    <Grid item md={3}>
+    <Grid item md={3} >
       <Card elevation={3} className={classes.root}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+            <Avatar aria-label="recipe" style={{backgroundColor: "#" + randomColor}}>
             </Avatar>
           }
           action={
@@ -69,16 +66,22 @@ const EventCard = (props) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={name}
-          subheader={date}
+          title={<Typography variant="h5" style={{fontFamily: 'Merriweather'}}> {name} </Typography>}
+          subheader={<Typography variant="subtitle1" style={{fontFamily: 'Merriweather'}}> {date} </Typography>}
         />
         <CardMedia
           className={classes.media}
-          image="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDRUPDw8VFRUVFRUVFRUVFRUVFRUVFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NFQ0NFSsZFR0rKy0tKysrKystKy0tLSsrNy03KystLSsrKy0tKzctKy0tKy0rLS0rKy0rLS0rKysrK//AABEIAMQBAQMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAQIH/8QAJRABAAIBAgUEAwAAAAAAAAAAAAHwETGhIUGRsdECUWHhcYHB/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAVEQEBAAAAAAAAAAAAAAAAAAAAIf/aAAwDAQACEQMRAD8A7gAgl/KiACgCXVUugHRS8kuoF4gAAAF9wFLoX3LqAACAKAhdVBLqqXQAvAFAAAAAx8icAFAAAAAAABFAAABFARQAvJFAS2FAAABLot0AAAAAAAAAMgKACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH7AAAAAAAABQAAAAAARQAAAAAAAAAAAAABAAAAAAUAAAAAAEUAQBUAAAAABRAUQBQAAAAAABAAAMgAAAAoAAACCoCoACoAAIAAACgAACgAAAAAAAAACAAAAoAAAAACKIAoAgqIAqAqKiioogigoAAAAAAACGQwFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQFRAEAAAAAAAAUAAAAAlAAAAUAAAAAAABAAAADAAAAAAAAoAAAAAACIKJkBRDIKIAoCgAAAAAIAAAAomFBBAFEBQAAEBRAFBAATKCiEAsjOVBRMqCiKoCAKIoCoAogIogCDWYBUAAELdgVC28gAJJkAygC5EMgAZBJORMHqQCJI1MAoQYUFymQFEAUIIvUALehbsCiW3mtt5AAAvEZ4e4It2S7AKs634QAL3L2QEX7RAVS9vIACALKABBOoAHqACVQBZEAWDwAI15QBYu5F2AQi7F2+wFW/wu+ABrACo/9k="
+          image={party}
           title=""
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="h6" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+            {location}
+          </Typography>
+          <Typography variant="subtitle2" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+            Description:
+          </Typography>
+          <Typography variant="body2" style={{fontFamily: 'Merriweather'}} color="black" component="p">
             {description}
           </Typography>
         </CardContent>

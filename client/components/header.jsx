@@ -5,15 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import WaveBorder from '../material-ui/wave.js';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
   waveBorder: {
     paddingTop: theme.spacing(4)
   }
@@ -36,7 +27,6 @@ const Header = () => {
             </li>
           </ul>
         </div>
-      
       </nav>
       <WaveBorder
         upperColor="#333a3f"
