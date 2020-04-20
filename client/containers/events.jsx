@@ -15,6 +15,7 @@ class Events extends Component {
       events: [],
     };
   }
+
   componentDidMount() {
     axios.get('/events').then((response) => {
       // console.log(response.data);
@@ -23,6 +24,14 @@ class Events extends Component {
       console.log(this.state);
     });
   }
+
+  deleteEvent(id) {
+    axios.delete('/events'+id)
+    this.setState({
+      events: this.state.events.filter(el => el.id !== id)
+    })
+  }
+
   render() {
     return (
       <Grid container spacing={2}>
@@ -35,6 +44,7 @@ class Events extends Component {
                 location={event.location}
                 date={event.date.substring(0,10)}
                 description={event.description}
+                deleteEvent={this.deleteEvent}
               />
           );
         })}

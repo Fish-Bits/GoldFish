@@ -9,6 +9,8 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/auth-routes');
 const eventsRouter = require('./routes/eventsRouter.js');
+app.use(express.json());
+
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000, //day
@@ -19,7 +21,6 @@ app.use(passport.initialize()); //initialize passport
 app.use(passport.session()); //use cookie session
 
 app.use('/events', eventsRouter)
-app.use(express.json());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
@@ -27,6 +28,9 @@ app.get('/', (req, res) => {
 
 
 app.use('/auth',authRoutes);
+app.get('/create',(req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
 
 app.use((err, req, res, next) => {
   const defaultErr = {
