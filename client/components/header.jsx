@@ -1,11 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import WaveBorder from '../material-ui/wave.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,33 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Header = (props) => {
+const Header = () => {
   const classes = useStyles();
-  const handleClick = () => {
-    // <Link>
-    // //to createEvent component
-    // </Link>
-  }
   return (
-    // <div className={classes.root}>
-    //   <AppBar position="static">
-    //     <Toolbar>
-    //       <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-    //         <MenuIcon />
-    //       </IconButton>
-    //       <Typography variant="h6" className={classes.title}>
-    //         Home
-    //       </Typography>
-    //       <Typography variant="h6" className={classes.title}>
-    //         Events
-    //       </Typography>
-    //       <Typography variant="h6" className={classes.title}>
-    //         Add Post
-    //       </Typography>
-    //       <Button color="inherit">Login</Button>
-    //     </Toolbar>
-    //   </AppBar>
-    // </div>
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <a className="navbar-brand" href="#">FishBits</a>

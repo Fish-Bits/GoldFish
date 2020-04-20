@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent:"space-around",
-    // overflow: scroll,
 
     '& > *': {
       margin: theme.spacing(1),
@@ -40,17 +39,19 @@ export default function chatWindow2() {
 
   const [chat, changeTextValue] = React.useState({
     textValue: '',
-    messages: [{from: 'user', msg: ' hello'}]
+    messages: [{from: 'Brianna', msg: ' hello'}]
   });
 
   const handleMessageSend = () => {
-    chat.messages.push({from: 'sieun', msg: chat.textValue})
+    chat.messages.push({from: 'Sieun', msg: chat.textValue})
+
     changeTextValue({...chat, textValue: ''})
   }
+
   return (
     <div style={{ width: '50%' }}>
       <div className={classes.root}>
-        <div className={classes.chatWindow}>
+        <div className={classes.chatWindow} >
           {
             chat.messages.map((chat, i) => (
               <div className={classes.flex} key={i} >

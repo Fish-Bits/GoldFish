@@ -17,11 +17,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 // import ChatIcon from '@material-ui/icons/Chat';
-// import Store from '../containers/Store.js';
 import ChatWindow2 from '../containers/chatWindow2';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import AddCommentIcon from '@material-ui/icons/AddComment';
+import CounterButton from './counterButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +82,7 @@ const EventCard = (props) => {
             {description}
           </Typography>
         </CardContent>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" mountOnExit>
           <CardContent>
             <div className='App'>
               <ChatWindow2 />
@@ -90,12 +90,7 @@ const EventCard = (props) => {
           </CardContent>
         </Collapse>
         <CardActions disableSpacing>
-          <IconButton aria-label="Attending">
-            <CheckIcon />
-          </IconButton>
-          <IconButton aria-label="notAttending">
-            <CloseIcon />
-          </IconButton>
+          <CounterButton />
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,

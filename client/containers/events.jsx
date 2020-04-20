@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Event from '../components/event.jsx';
 import EventCard from '../components/eventCard.jsx';
 const axios = require('axios');
 
 const styles = {
   Paper: {padding:20, marginTop: 10, marginBottom: 10},
 }
-
 class Events extends Component {
   constructor(props) {
     super(props);

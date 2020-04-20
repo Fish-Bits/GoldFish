@@ -127,7 +127,6 @@ const Login = (props) => {
             >
               Sign In
             </Button>
-
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -145,7 +144,6 @@ const Login = (props) => {
                 Google
               </Link>
             </Box>
-
           </form>
         </div>
       </Grid>

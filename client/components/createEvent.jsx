@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 
 class createEvent extends Component {
   constructor(props) {
@@ -21,7 +20,6 @@ class createEvent extends Component {
   handleSubmit(){
     axios.post('/event/:id').then((response) => {
       if(response.ok){
-        
       }
     })
   }
