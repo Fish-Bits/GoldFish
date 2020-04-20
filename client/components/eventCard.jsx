@@ -19,9 +19,14 @@ import Grid from '@material-ui/core/Grid';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import AddCommentIcon from '@material-ui/icons/AddComment';
+import grey from '@material-ui/core/colors/grey';
+
+// const color = grey[50];
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: 'transparent !important',
+    color: '#FFFFFF',
     maxWidth: 345,
   },
   media: {
