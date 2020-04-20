@@ -11,16 +11,16 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 // import ChatIcon from '@material-ui/icons/Chat';
 import ChatWindow2 from '../containers/chatWindow2';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
-import AddCommentIcon from '@material-ui/icons/AddComment';
+// import CheckIcon from '@material-ui/icons/Check';
+// import CloseIcon from '@material-ui/icons/Close';
+// import AddCommentIcon from '@material-ui/icons/AddComment';
 import CounterButton from './counterButton';
 
 const useStyles = makeStyles((theme) => ({
