@@ -5,10 +5,28 @@ const eventsControllers = {};
 
 
 eventsControllers.getEvents = async (req, res, next) => {
+  const events = [];
   try{
     const text = `SELECT * FROM events`;
     const result = await db.query(text);
-    res.locals.events = result.rows;
+    console.log(result);
+
+    // loop through each event
+    for (let i = 0; i < result.rows.length; i++) {
+      const event = { ...result.rows[i] };
+      // count participants for each event
+      const text2 = `
+        SELECT COUNT(user_id) 
+        FROM participants 
+        WHERE event_id = $1
+      `;
+      const params = [ event.id ]
+      const result2 = await db.query(text2, params);
+
+      event.participants = [ ...result2.rows ];
+      events.push(event);
+    }
+    res.locals.events = events;
     next();
   }
   
@@ -117,7 +135,7 @@ eventsControllers.createComment = async (req, res, next) => {
   catch(err) {
     next({
       log: `events.Controller.createComment: error: ${err}`,
-      message: { err: `Error in eventsControllers.createComment: ${err}`};
+      message: { err: `Error in eventsControllers.createComment: ${err}`}
     })
   }
 }
