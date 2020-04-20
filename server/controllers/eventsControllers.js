@@ -110,8 +110,8 @@ eventsControllers.getComment = async (req, res, next) => {
   try {
     const text = `SELECT * FROM comments WHERE id = $1`;
     const params = [id];
-    const result = db.query(text, params);
-    res.locals.getComment = result.rows;
+    const result = await db.query(text, params);
+    res.locals.getComment = result.rows[0];
     next();
   }
   catch(err){
@@ -123,11 +123,11 @@ eventsControllers.getComment = async (req, res, next) => {
 }
 
 eventsControllers.createComment = async (req, res, next) => {
-  const { user_id, event_id, comment } = req.body;
+  const { user_id, comment } = req.body;
   const { id } = req.params;
   try {
-    const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3) WHERE evetid=$4`;
-    const params = [user_id, event_id, comment, id]
+    const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3)`;
+    const params = [user_id, id, comment]
     const result = await db.query(text, params);
     res.locals.createComment = result.rows;
     next();

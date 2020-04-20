@@ -36,7 +36,6 @@ class Events extends Component {
                 date={event.date.substring(0,10)}
                 description={event.description}
               />
-            
           );
         })}
       </Grid>

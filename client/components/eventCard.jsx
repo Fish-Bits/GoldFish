@@ -16,6 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
+import ChatWindow from '../containers/chatWindow.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,6 +84,7 @@ const EventCard = (props) => {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+        <ChatWindow />
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
