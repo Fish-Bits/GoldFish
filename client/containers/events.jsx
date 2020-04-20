@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Event from '../components/event.jsx';
-import eventCard from '../components/eventCard.jsx';
+import EventCard from '../components/eventCard.jsx';
 const axios = require('axios');
 
 const styles = {
@@ -28,7 +28,7 @@ class Events extends Component {
       <Grid container spacing={2}>
         {this.state.events.map((event, i) => {
           return (
-              <Event
+              <EventCard
                 styles={styles.Paper}
                 key={i}
                 name={event.name}
