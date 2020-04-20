@@ -9,7 +9,6 @@ eventsControllers.getEvents = async (req, res, next) => {
   try{
     const text = `SELECT * FROM events`;
     const result = await db.query(text);
-    console.log(result);
 
     // loop through each event
     for (let i = 0; i < result.rows.length; i++) {
@@ -57,7 +56,6 @@ eventsControllers.getDetails = async (req, res, next) => {
 
 eventsControllers.createPost = async (req, res, next) => {
   const { name, location, date, description, user_id } = req.body;
-  console.log('req.body', req.body)
   // const name = 'Brian';
   // const location = 'Brians house';
   // const date = '2020-04-18';

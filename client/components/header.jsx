@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import WaveBorder from '../material-ui/wave.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  waveBorder: {
+    paddingTop: theme.spacing(4)
+  }
 }));
+
 
 const Header = (props) => {
   const classes = useStyles();
@@ -41,6 +46,12 @@ const Header = (props) => {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      <WaveBorder
+        upperColor="#4053af"
+        lowerColor="#FFFFFF"
+        className={classes.waveBorder}
+        animationNegativeDelay={2}
+      />
     </div>
   );
 }

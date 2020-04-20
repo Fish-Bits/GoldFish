@@ -8,16 +8,32 @@ class ChatWindow extends Component {
     super();
     this.state = {
       messageList: []
+
+
     };
   }
  
+  
   _onMessageWasSent(message) {
     this.setState({
       messageList: [...this.state.messageList, message],
     })
 
-    axios.post('/:id/comment', message)
-    .then(res => console.log(res.data))
+
+    // fetch('/:id/comment', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     user_id: 1, // get from app
+    //     comment: "byebye", // get from input box
+    //   })
+    // })
+
+  //   axios.post('/:id/comment', message)
+  //   .then(req.body => console.log(req.body))
   }
  
   _sendMessage(text) {
@@ -29,6 +45,8 @@ class ChatWindow extends Component {
           data: { text }
         }]
       })
+
+
     }
   }
  
@@ -36,7 +54,7 @@ class ChatWindow extends Component {
     return (<div>
       <Launcher
         agentProfile={{
-          teamName: 'Fish Bits ChitChats',
+          teamName: 'Fish Bits Chit Chats',
           imageUrl: <img src={Sticker}/>
         }}
         onMessageWasSent={this._onMessageWasSent.bind(this)}
