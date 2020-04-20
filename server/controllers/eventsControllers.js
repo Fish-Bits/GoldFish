@@ -126,7 +126,7 @@ eventsControllers.createComment = async (req, res, next) => {
   const { user_id, event_id, comment } = req.body;
   const { id } = req.params;
   try {
-    const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3) WHERE id=$4`;
+    const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3) WHERE evetid=$4`;
     const params = [user_id, event_id, comment, id]
     const result = await db.query(text, params);
     res.locals.createComment = result.rows;

@@ -16,8 +16,8 @@ class ChatWindow extends Component {
       messageList: [...this.state.messageList, message],
     })
 
-    // axios.post('/:id/comment', message)
-    // .then(res => console.log(res.data))
+    axios.post('/:id/comment', message)
+    .then(res => console.log(res.data))
   }
  
   _sendMessage(text) {

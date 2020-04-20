@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import Nav from '../components/nav.jsx';
 import EventContainer from './eventcontainer.jsx';
+import ChatWindow from './chatWindow.js';
 class MainContainer extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,10 @@ class MainContainer extends Component {
       <div className="main">
         <Nav />
         <div className="events">
+        <div>
           <EventContainer />
+          <ChatWindow />
+        </div>
         </div>
       </div>
     );

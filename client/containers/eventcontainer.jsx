@@ -21,7 +21,7 @@ class EventContainer extends Component {
 
   render() {
     const events = this.state.events.map((elm, i) => {
-      return (<div>
+      return (
       <Event
         key={i}
         name={elm.name}
@@ -29,8 +29,6 @@ class EventContainer extends Component {
         date={elm.date}
         description={elm.description}
       />
-      <ChatWindow />
-      </div>
     )});
     return <div>{events}</div>;
   }
