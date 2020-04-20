@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Event from '../components/event.jsx';
+import eventCard from '../components/eventCard.jsx';
 const axios = require('axios');
 
 const styles = {
-  Paper: {padding:20, marginTop: 10, marginBottom: 10}
+  Paper: {padding:20, marginTop: 10, marginBottom: 10},
 }
 
 class Events extends Component {
@@ -24,7 +25,7 @@ class Events extends Component {
   }
   render() {
     return (
-      <Grid container sm={12}>
+      <Grid container spacing={2}>
         {this.state.events.map((event, i) => {
           return (
               <Event
@@ -32,7 +33,7 @@ class Events extends Component {
                 key={i}
                 name={event.name}
                 location={event.location}
-                date={event.date}
+                date={event.date.substring(0,10)}
                 description={event.description}
               />
             

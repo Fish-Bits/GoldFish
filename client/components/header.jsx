@@ -30,7 +30,13 @@ const Header = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
+            Home
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
             Events
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            Add Post
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
