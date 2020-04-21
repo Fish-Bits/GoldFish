@@ -22,7 +22,6 @@ eventsControllers.getEvents = async (req, res, next) => {
       const result2 = await db.query(text2, params);
 
       event.participants = [ ...result2.rows ];
-      console.log('event.partipants: ', event.participants);
       events.push(event);
     }
     res.locals.events = events;
