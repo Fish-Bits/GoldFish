@@ -12,3 +12,8 @@ body, html {
   display: flex;
   justify-content: center;
 }
+
+.resize {
+  width: 30px;
+  height: auto;
+}
