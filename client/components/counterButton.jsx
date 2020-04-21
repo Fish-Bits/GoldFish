@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import sticker from '../assets/GoldfishSticker.png';
+import '../stylesheets/app.css';
 
 
 // Button to increment number of participants
@@ -23,7 +25,7 @@ class CounterButton extends Component {
 
     return (
       <ButtonGroup variant="primary" color="primary" aria-label="outlined primary button group">
-        <Button onClick={this.handleIncrement}>+</Button>
+        <Button onClick={this.handleIncrement}><img src={sticker} className="resize"/></Button>
         {displayCounter && <Button disabled>{this.state.counter}</Button>}
         {displayCounter && <Button onClick={this.handleDecrement}>-</Button>}
       </ButtonGroup>

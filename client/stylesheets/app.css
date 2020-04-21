@@ -1,5 +1,19 @@
+body, html {
+  height: 100%;
+  }
+  .bg {
+  background-image: url("../assets/iStock-504085304.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
 
 .auth-button {
   display: flex;
   justify-content: center;
+}
+
+.resize {
+  width: 30px;
+  height: auto;
 }

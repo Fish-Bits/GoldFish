@@ -39,8 +39,7 @@
     "react-chat-window": "^1.2.1",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
-    "react-simple-infinite-loading": "^1.0.0"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -49,7 +48,6 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.2",
-    "file-loader": "^6.0.0",
     "nodemon": "^2.0.3",
     "style-loader": "^1.1.4",
     "url-loader": "^4.1.0",
