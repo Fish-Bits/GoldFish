@@ -13,6 +13,9 @@ body, html {
   justify-content: center;
 }
 
+#navbarNavDropdown{
+  justify-content: flex-end;
+}
 .resize {
   width: 30px;
   height: auto;
