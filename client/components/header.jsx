@@ -18,7 +18,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="#">FishBits</a>    
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav" id="navbar-buttons">
             <li className="nav-item">
               <Link to="/create" className="nav-link">New Event</Link>
             </li>

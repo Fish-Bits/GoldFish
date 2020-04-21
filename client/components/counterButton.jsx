@@ -22,7 +22,7 @@ class CounterButton extends Component {
     const displayCounter = this.state.counter > 0;
 
     return (
-      <ButtonGroup variant="primary" color="primary" aria-label="outlined primary button group">
+      <ButtonGroup color="primary" aria-label="outlined primary button group">
         <Button onClick={this.handleIncrement}>+</Button>
         {displayCounter && <Button disabled>{this.state.counter}</Button>}
         {displayCounter && <Button onClick={this.handleDecrement}>-</Button>}

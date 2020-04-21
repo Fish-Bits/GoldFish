@@ -14,6 +14,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 import party from '../assets/shutterstock_199419065.jpg';
+import math from '../assets/upsidedown.jpg';
+import python from '../assets/python.jpg';
+import bri from '../assets/bri.jpg';
+import noimage from '../assets/noimage.jpg';
 import ChatWindow2 from '../containers/chatWindow2';
 import CounterButton from './counterButton';
 
@@ -52,7 +56,8 @@ const EventCard = (props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  const imgArr = [party, python, bri, math, noimage, noimage, noimage]
+  console.log(props.id)
   return (
     <Grid item md={3} >
       <Card elevation={3} className={classes.root}>
@@ -71,21 +76,21 @@ const EventCard = (props) => {
         />
         <CardMedia
           className={classes.media}
-          image={party}
+          image={imgArr[props.id]}
           title=""
         />
         <CardContent>
-        <Typography variant="h6" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+        <Typography variant="h6" style={{fontFamily: 'Merriweather', color:"black"}} component="p">
             {location}
           </Typography>
-          <Typography variant="subtitle2" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+          <Typography variant="subtitle2" style={{fontFamily: 'Merriweather', color:"black"}} component="p">
             Description:
           </Typography>
-          <Typography variant="body2" style={{fontFamily: 'Merriweather'}} color="black" component="p">
+          <Typography variant="body2" style={{fontFamily: 'Merriweather', color:"black"}} component="p">
             {description}
           </Typography>
         </CardContent>
-        <Collapse in={expanded} timeout="auto" mountOnExit>
+        <Collapse in={expanded} timeout="auto">
           <CardContent>
             <div className='App'>
               <ChatWindow2 />
