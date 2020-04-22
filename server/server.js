@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 //Below are hardcoded features
-// app.use('/auth', authRoutes);
+app.use('/auth', authRoutes);
 // app.get('/create', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../index.html'));
 // });
@@ -40,9 +40,9 @@ app.get('/', (req, res) => {
 // app.get('/login', function (req, res) {
 //   res.sendFile(path.join(__dirname, '../index.html'));
 // });
-// app.get('/home', function (req, res) {
-//   res.sendFile(path.join(__dirname, '../index.html'));
-// });
+app.get('/home', function (req, res) {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
 
 //Routes
 app.use('/events', eventsRouter);

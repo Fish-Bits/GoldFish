@@ -4,7 +4,6 @@ import Login from './containers/login.jsx';
 import CreateEvent from './components/createEvent';
 import ProtectedRoute from './components/ProtectedRoute';
 import Signup from './containers/Signup';
-
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -23,8 +22,8 @@ const App = ({ authenticated }) => {
           render={() => <EventsPage />}
         />
         <Route exact path='/' component={Login} />
-        <Route exact parh='/create' component={CreateEvent} />
-        <Route exact parh='/signup' component={Signup} />
+        <Route exact path='/signup' component={Signup} />
+        <Route exact path='/create' component={CreateEvent} />
       </Switch>
     </>
   );
