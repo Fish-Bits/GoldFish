@@ -7,7 +7,11 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-
+    case (types.GET_USER):
+      return {
+        ...state,
+        currentUser: action.payload
+      }
 
     default:
       return { ...state }
