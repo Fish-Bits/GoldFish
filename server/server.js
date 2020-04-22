@@ -1,35 +1,52 @@
 const express = require('express');
-const app = express();
 const path = require('path');
 const port = 3000;
-const passport = require('passport')
+const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
+const cors = require('cors');
 const cookieSession = require('cookie-session');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth-routes');
+const userSignUpRoute = require('./routes/userSignupRoute');
 const eventsRouter = require('./routes/eventsRouter.js');
+
+//App
+const app = express();
+
+//Middlewares
 app.use(express.json());
+app.use(cors());
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIEKEY],
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000, //day
-  keys: [process.env.COOKIEKEY]
-}))
-
-app.use(passport.initialize()); //initialize passport
-app.use(passport.session()); //use cookie session
-
-app.use('/events', eventsRouter)
-
+//Serve the main page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-app.use('/auth',authRoutes);
-app.get('/create',(req, res) => {
+//Below are hardcoded features
+app.use('/auth', authRoutes);
+// app.get('/create', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../index.html'));
+// });
+
+// app.get('/login', function (req, res) {
+//   res.sendFile(path.join(__dirname, '../index.html'));
+// });
+app.get('/home', function (req, res) {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
+
+//Routes
+app.use('/events', eventsRouter);
+app.use('/', userSignUpRoute);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -40,14 +57,6 @@ app.use((err, req, res, next) => {
   const errorObj = Object.assign({}, defaultErr, err);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
-app.get('/login', function(req, res) {
-  res.sendFile(path.join(__dirname, '../index.html'));
-})
-app.get('/home', function(req, res) {
-  res.sendFile(path.join(__dirname, '../index.html'));
-})
-
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
