@@ -1,15 +1,32 @@
 import React, { Component, Fragment } from 'react';
-import Header from './components/header.jsx';
-import Events from './containers/events.jsx';
-import './stylesheets/app.css';
+import EventsPage from './containers/EventsPage.jsx';
+import Login from './containers/login.jsx';
+import CreateEvent from './components/createEvent';
+import ProtectedRoute from './components/ProtectedRoute';
+import Signup from './containers/Signup';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const App = (props) => {
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.authenticated,
+});
+
+const App = ({ authenticated }) => {
   return (
-    <div className="bg">
-      <Header />
-      <Events />
-    </div>
+    <>
+      <Switch>
+        <ProtectedRoute
+          authenticated={authenticated}
+          exact
+          path='/home'
+          render={() => <EventsPage />}
+        />
+        <Route exact path='/' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        <Route exact path='/create' component={CreateEvent} />
+      </Switch>
+    </>
   );
 };
 
-export default App;
+export default connect(mapStateToProps, null)(App);
