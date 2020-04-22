@@ -1,49 +1,26 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 class createEvent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      date: new Date(),
-      description: '',
-      location: ''
-    }
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  state = {
+    name: '',
+    date: new Date(),
+    description: '',
+    location: '',
+    submitted: false,
   }
 
-  onChangeName(e){
+  handleChange = (e) => {
+    const { name, value } = e.target
     this.setState({
-      name: e.target.value,
+      [name]: value,
     });
   }
 
-  onChangeDate(date){
-    this.setState({
-      date: date
-    });
-  }
-
-  onChangeLocation(e){
-    this.setState({
-      location: e.target.value,
-    });
-  }
-
-  onChangeDescription(e){
-    this.setState({
-      description: e.target.value,
-    });
-  }
-
-  onSubmit(){
+  onSubmit = () => {
     const event = {
       name: this.state.name,
       date: this.state.date,
@@ -51,64 +28,68 @@ class createEvent extends Component {
       location: this.state.location,
     }
 
-    axios.post('/events/', event)
-    .then(()=> {window.location = '/home'})
+    axios.post(`/events/1`, event)
+      .then((res) => { this.setState({ submitted: true }) })
   }
+
   render() {
-    return (
+    if (this.state.submitted) return <Redirect to='/home' />
+    else return (
       <div>
         <h2>Add New Event</h2>
-          <div>
-            <div className="form-group">
-              <label>Name:</label>
-              <div>
-                <input type="text"
-                  className="form-control"
-                  value={this.state.name}
-                  onChange={this.onChangeName}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label>Date:</label>
-              <div>
-                  <DatePicker
-                  selected={this.state.date}
-                  onChange={this.onChangeDate}
-                  />
-                </div>
-            </div>
-
-            <div className="form-group">
-              <label>Location:</label>
-              <div>
-                <input type="text"
-                  className="form-control"
-                  value={this.state.location}
-                  onChange={this.onChangeLocation}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label>Description:</label>
-              <div>
-                <input type="text"
-                  className="form-control"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <button onClick={this.onSubmit}>Save</button>
+        <div>
+          <div className="form-group">
+            <label>Name:</label>
+            <div>
+              {/** date picker needs fixing; format: YYYY/MM/DD*/}
+              <input type="text"
+                name='name'
+                className="form-control"
+                onChange={this.handleChange}
+              />
             </div>
           </div>
+
+          <div className="form-group">
+            <label>Date:</label>
+            <div>
+              <input name='date' onChange={this.handleChange} />
+              {/* <DatePicker
+                selected={this.state.date}
+                onChange={this.handleChange}
+              /> */}
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Location:</label>
+            <div>
+              <input type="text"
+                className="form-control"
+                name='location'
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Description:</label>
+            <div>
+              <input type="text"
+                className="form-control"
+                name='description'
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <button onClick={this.onSubmit}>Save</button>
+          </div>
+        </div>
       </div>
     );
-    }
   }
+}
 
 export default createEvent;

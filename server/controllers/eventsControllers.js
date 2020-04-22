@@ -50,18 +50,20 @@ eventsControllers.getDetails = async (req, res, next) => {
 };
 
 eventsControllers.createPost = async (req, res, next) => {
-  console.log('req.body', req.body);
+  // console.log('req.body', req.body);
   const { name, location, date, description } = req.body;
-  console.log('WE ARE TESTING');
-  const user_id = 1;
+  // console.log('WE ARE TESTING', req.body.date);
+  const user_id = req.params.id;
+  // console.log('id', user_id)
 
   try {
-    const text = `INSERT INTO events (name, location, date, description, user_id) VALUES ($1, $2, $3, $4, $5)`;
+    const text = `INSERT INTO events (name, location, date, description, user_id) VALUES ($1, $2, CAST($3 AS DATE), $4, $5)`;
     const body = [name, location, date, description, user_id];
     const result = await db.query(text, body);
     res.locals.createPost = result.rows;
     next();
   } catch (err) {
+    console.log(err)
     next({
       log: `eventsControllers.createPosterror: ${err}`,
       message: { err: `Error in eventsControllers.createPost${err}` },
