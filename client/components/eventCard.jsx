@@ -22,7 +22,7 @@ import noimage from '../assets/noimage.jpg';
 import ChatWindow2 from '../containers/chatWindow2';
 import CounterButton from './counterButton';
 
-const randomColor = Math.floor(Math.random()*16777215).toString(16);
+const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 'auto',
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EventCard = (props) => {
-  const { name, date, description, location, image} = props;
+  const { name, date, description, location, image } = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -58,13 +58,13 @@ const EventCard = (props) => {
     setExpanded(!expanded);
   };
   const imgArr = [party, python, bri, math, noimage, noimage, noimage]
-  console.log(props.id)
+  // console.log(props.id)
   return (
     <Grid item md={3} >
       <Card elevation={3} className={classes.root}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" style={{backgroundColor: "#" + randomColor}}>
+            <Avatar aria-label="recipe" style={{ backgroundColor: "#" + randomColor }}>
             </Avatar>
           }
           action={
@@ -72,8 +72,8 @@ const EventCard = (props) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={<Typography variant="h5" style={{fontFamily: 'Merriweather'}}> {name} </Typography>}
-          subheader={<Typography variant="subtitle1" style={{fontFamily: 'Merriweather'}}> {date} </Typography>}
+          title={<Typography variant="h5" style={{ fontFamily: 'Merriweather' }}> {name} </Typography>}
+          subheader={<Typography variant="subtitle1" style={{ fontFamily: 'Merriweather' }}> {date} </Typography>}
         />
         <CardMedia
           className={classes.media}
@@ -81,13 +81,13 @@ const EventCard = (props) => {
           title=""
         />
         <CardContent>
-        <Typography variant="h6" style={{fontFamily: 'Merriweather', color:"black"}} component="p">
+          <Typography variant="h6" style={{ fontFamily: 'Merriweather', color: "black" }} component="p">
             {location}
           </Typography>
-          <Typography variant="subtitle2" style={{fontFamily: 'Merriweather', color:"black"}} component="p">
+          <Typography variant="subtitle2" style={{ fontFamily: 'Merriweather', color: "black" }} component="p">
             Description:
           </Typography>
-          <Typography variant="body2" style={{fontFamily: 'Merriweather', color:"black"}} component="p">
+          <Typography variant="body2" style={{ fontFamily: 'Merriweather', color: "black" }} component="p">
             {description}
           </Typography>
         </CardContent>
