@@ -42,6 +42,7 @@ usersControllers.verifyUser = (req, res, next) => {
       bcrypt.compare(req.body.password, hash).then((passwordCorrect) => {
         if (passwordCorrect) {
           res.locals.token = jwt.sign(res.locals.user, process.env.TOKEN_SECRET, { expiresIn: '120s' })
+          console.log(res.locals.token)
           return next();
         } else return res.status(401).json({ success: false });
       });
