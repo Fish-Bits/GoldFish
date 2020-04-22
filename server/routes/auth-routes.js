@@ -20,6 +20,7 @@ router.post('/login', usersControllers.verifyUser, (req, res) => {
     .json({
       username: res.locals.username,
       userId: res.locals.userId,
+      token: res.locals.token,
       success: true,
     });
 });
