@@ -3,6 +3,7 @@ const path = require('path');
 const port = 3000;
 const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const cookieSession = require('cookie-session');
 require('dotenv').config();
@@ -23,6 +24,7 @@ app.use(
     keys: [process.env.COOKIEKEY],
   })
 );
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -47,6 +49,7 @@ app.get('/home', function (req, res) {
 //Routes
 app.use('/events', eventsRouter);
 app.use('/', userSignUpRoute);
+// app.use('/', //INSERT LOGIN ROUTE)
 
 app.use((err, req, res, next) => {
   const defaultErr = {

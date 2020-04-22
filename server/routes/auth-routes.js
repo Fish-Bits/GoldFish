@@ -15,13 +15,11 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/login', usersControllers.verifyUser, (req, res) => {
-  res
-    .status(200)
-    .json({
-      username: res.locals.username,
-      userId: res.locals.userId,
-      success: true,
-    });
+  res.status(200).json({
+    username: res.locals.username,
+    userId: res.locals.userId,
+    success: true,
+  });
 });
 
 //auth with google

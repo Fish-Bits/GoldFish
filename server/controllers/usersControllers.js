@@ -1,6 +1,8 @@
 const db = require('../models/eventsModels.js');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
+const jwt = require('jsonwebtoken');
+const expressJWT = require('express-jwt');
 
 const usersControllers = {};
 
@@ -20,13 +22,7 @@ usersControllers.createUser = (req, res, next) => {
         status: 'success',
       });
     })
-    .catch(
-      (err) => console.log(err)
-      // next({
-      //   log: `usersControllers.createUser: error: ${err}`,
-      //   message: { err: `Error in usersControllers.createUser: ${err}` },
-      // })
-    );
+    .catch((err) => console.log(err));
 };
 
 usersControllers.verifyUser = (req, res, next) => {
@@ -37,11 +33,25 @@ usersControllers.verifyUser = (req, res, next) => {
       console.log('user', user);
       res.locals.username = user.username;
       res.locals.userId = user.id;
+      res.locals.user = user;
       const hash = bcrypt.hashSync(req.body.password, SALT_WORK_FACTOR);
       bcrypt.compare(req.body.password, hash).then((passwordCorrect) => {
         console.log('passwordCorrect', passwordCorrect);
-        if (passwordCorrect) return next();
-        else return res.status(401).json({ success: false });
+        if (passwordCorrect) {
+          console.log('jwt process begins');
+          const token = jwt.sign(
+            { id: res.locals.userId },
+            process.env.JWT_SECRET
+          );
+          console.log(token);
+          res.cookie('t', token, { expire: new Date() + 9999 });
+
+          console.log(res.locals.user);
+
+          const { id } = res.locals.user;
+
+          return res.status(200).json({ token, user: { id } });
+        } else return res.status(401).json({ success: false });
       });
     })
     .catch((err) =>
