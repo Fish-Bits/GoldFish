@@ -5,15 +5,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import LinkAuth from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import googleImg from '../assets/google.png';
 import { Link } from 'react-router-dom';
+import { signup } from '../auth/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,40 +46,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = (props) => {
+const Signup = (props) => {
   const classes = useStyles();
-  const doLogin = () => {
-    if (!values.username) return;
-    if (!values.password) return;
-    fetch('/auth/login', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result && result.success) {
-          console.log('success');
-        }
-      });
-  };
 
   const [values, setValues] = React.useState({
     username: '',
     password: '',
+    error: '',
+    success: false,
   });
 
+  const { username, password, error, success } = values;
+
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    setValues({ ...values, error: false, [prop]: event.target.value });
   };
 
-  return (
+  const clickSubmit = (event) => {
+    event.preventDefault();
+    console.log('I am here');
+    setValues({ ...values, error: false });
+    signup({ username, password }).then((data) => {
+      console.log(data);
+      if (data === undefined) {
+        console.log('I am at the error here');
+        setValues({ ...values, error: true, success: false });
+      } else if (data.error) {
+        setValues({ ...values, error: true, success: false });
+      } else {
+        setValues({
+          ...values,
+          username: '',
+          password: '',
+          error: '',
+          success: true,
+        });
+      }
+    });
+  };
+
+  const signUpForm = () => (
     <Grid container component='main' className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -91,8 +95,9 @@ const Login = (props) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign in
+            Sign Up
           </Typography>
+
           <form className={classes.form} noValidate>
             <TextField
               variant='outlined'
@@ -126,30 +131,41 @@ const Login = (props) => {
               fullWidth
               variant='contained'
               color='primary'
-              onClick={doLogin}
+              onClick={clickSubmit}
               className={classes.submit}
             >
-              Sign In
+              Create Your Account
             </Button>
-            <Grid container>
-              <Grid item xs>
-                Forgot password?
-              </Grid>
-              <Link to='/signup'>
-                <Grid item>{"Don't have an account? Sign Up"}</Grid>
-              </Link>
-            </Grid>
-            <Box mt={5}>
-              <div className='auth-button'>
-                <LinkAuth href='/auth/google'>
-                  <img src={googleImg} />
-                </LinkAuth>
-              </div>
-            </Box>
           </form>
         </div>
       </Grid>
     </Grid>
   );
+
+  const showError = () => (
+    <div
+      className='alert alert-danger'
+      style={{ display: error ? '' : 'none' }}
+    >
+      Can't Create Account
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className='alert alert-info'
+      style={{ display: success ? '' : 'none' }}
+    >
+      New account has been created. Please <Link to='/'>Log In</Link>
+    </div>
+  );
+
+  return (
+    <React.Fragment>
+      {showSuccess()}
+      {showError()}
+      {signUpForm()}
+    </React.Fragment>
+  );
 };
-export default Login;
+export default Signup;
