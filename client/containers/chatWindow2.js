@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
@@ -35,25 +36,45 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //a comment requires a user_id and an event_id
-export default function chatWindow2() {
+const chatWindow2 = props => {
   const classes = useStyles();
+  const [chat, setChat] = useState("");
+  const [messages, setMessages] = useState([]);
+  // const [chat, changeTextValue] = React.useState({
+  //   textValue: "",
+  //   messages: [{ from: "Brianna", msg: " hello" }]
+  // });
+  //get all messages
+  // const getMessages = () => {
+  //   const id = props.eventId;
+  //   axios
+  //     .get(`/events/${id}/comment`)
+  //     .then(res => {
+  //       console.log("axios get", res);
+  //       console.log("axios get", res.data);
+  //       // setMessages([res.data]);
+  //     })
+  //     .catch(error => console.log(error));
+  // };
+  //create new messages
+  const handleChange = e => setMessage(e.target.value);
 
-  const [chat, changeTextValue] = React.useState({
-    textValue: "",
-    messages: [{ from: "Brianna", msg: " hello" }]
-  });
-
-  const handleMessageSend = () => {
-    chat.messages.push({ from: "Sieun", msg: chat.textValue });
-
-    changeTextValue({ ...chat, textValue: "" });
+  const handleSubmit = e => {
+    e.preventdefault();
+    //make our api request to post our data
   };
+
+  // const handleMessageSend = () => {
+  //   chat.messages.push({ from: "Sieun", msg: chat.textValue });
+
+  //   changeTextValue({ ...chat, textValue: "" });
+  // };
 
   return (
     <div style={{ width: "50%" }}>
       <div className={classes.root}>
         <div className={classes.chatWindow}>
-          {chat.messages.map((chat, i) => (
+          {messages.map((message, i) => (
             <div className={classes.flex} key={i}>
               <Chip
                 label={chat.from}
@@ -61,7 +82,7 @@ export default function chatWindow2() {
                 icon={<FaceIcon />}
               />
               <Typography variant="body2" color="textSecondary" component="p">
-                {chat.msg}
+                {message.comment}
               </Typography>
             </div>
           ))}
@@ -90,4 +111,6 @@ export default function chatWindow2() {
       </div>
     </div>
   );
-}
+};
+
+export default chatWindow2;
