@@ -45,8 +45,8 @@ usersControllers.verifyUser = (req, res, next) => {
             { expiresIn: "1800s" }
           );
           return next();
-        } else return console.log("rejected");
-        res.status(401).json({ success: false });
+        } else { console.log("rejected");
+        res.status(401).json({ success: false })};
       });
     })
     .catch(err =>
