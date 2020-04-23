@@ -21,6 +21,7 @@ export const login = (user) => {
           username: result.username,
           userId: result.userId
         }
+        console.log(currentUser)
         localStorage.setItem("token", result.token)
         dispatch({
           type: types.LOGIN,
