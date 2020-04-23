@@ -62,31 +62,6 @@ const Login = (props) => {
     props.login(values)
   }
 
-
-  // const doLogin = () => {
-  //   debugger
-  //   if (!values.username) return;
-  //   if (!values.password) return;
-  //   fetch('/auth/login', {
-  //     method: 'post',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       username: values.username,
-  //       password: values.password,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       console.log(result)
-  //       if (result && result.success) {
-  //         console.log('success');
-  //       }
-  //     });
-  // };
-
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
