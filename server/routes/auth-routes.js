@@ -16,14 +16,14 @@ router.get('/logout', (req, res) => {
 
 router.get('/signout', usersControllers.signout);
 
-router.post('/login', usersControllers.verifyUser, (req, res) => {
-  console.log(req.body);
-  res.status(200).json({
-    username: res.locals.username,
-    userId: res.locals.userId,
-    success: true,
-  });
-});
+router.post('/login', usersControllers.verifyUser);
+
+// res.status(200).json({
+//   username: res.locals.user.username,
+//   userId: res.locals.user.id,
+//   token: res.locals.token,
+//   success: true,
+// });
 
 //auth with google
 //we want passport to take control to interact with google and send user to consent screen

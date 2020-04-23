@@ -51,10 +51,10 @@ export const isAuthenticated = () => {
   }
 };
 
-export const signout = (next) => {
+export const signout = () => {
+  console.log('at signout');
   if (typeof window !== 'undefined') {
-    localStorage.removeItem('jwt');
-    next();
+    localStorage.removeItem('token');
     return fetch(`http://localhost:3000/auth/`, {
       method: 'GET',
     })

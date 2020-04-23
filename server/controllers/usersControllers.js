@@ -24,6 +24,21 @@ usersControllers.createUser = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
+//Authorization: bearer <token>
+usersControllers.isAuth = (req, res) => {
+  const authHeader = req.headers['authorization'];
+  console.log('this is the headers request', authHeader);
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    console.log(err);
+    if (err) return res.sendStatus(403);
+    req.user = user;
+  });
+};
+
 usersControllers.signout = (req, res) => {
   res.clearCookie('t');
   res.json({ message: 'user signout success' });
@@ -36,14 +51,22 @@ usersControllers.verifyUser = (req, res, next) => {
     res.locals.user = user;
     bcrypt.compare(req.body.password, user.password).then((passwordCorrect) => {
       if (passwordCorrect) {
+        console.log('password correct', passwordCorrect);
+
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
         res.cookie('t', token, { expire: new Date() + 9999 });
 
         const { id, username } = user;
-
-        res.status(200).json({ token, user: { id, username } });
+        console.log(id, username);
+        res.status(200).json({
+          username: username,
+          userId: id,
+          success: true,
+          token: token,
+        });
       } else {
+        console.log('incorrect');
         res.status(401).json({ success: false });
       }
     });

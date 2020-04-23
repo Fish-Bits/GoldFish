@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import Header from '../components/header.jsx';
-import Events from './events.jsx';
+import Header from '../components/Header.jsx';
+import Events from './Events.jsx';
 import '../stylesheets/app.css';
 
 const EventsPage = (props) => {

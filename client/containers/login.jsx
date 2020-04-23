@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import googleImg from '../assets/google.png';
 import { Link, Redirect } from 'react-router-dom';
-import { login, authenticate, isAuthenticated } from '../auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,123 +54,89 @@ const Login = (props) => {
   const [values, setValues] = React.useState({
     username: '',
     password: '',
-    error: '',
-    redirectToHome: false,
   });
 
-  const { username, password, error, redirectToHome } = values;
-  const { user } = isAuthenticated();
+  const onSubmit = () => {
+    if (!values.username) return;
+    if (!values.password) return;
+    props.login(values);
+  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
-  const clickSubmit = (event) => {
-    event.preventDefault();
-    console.log('clicked submit');
-    setValues({ ...values, error: false });
-    console.log(values);
-    login({ username, password }).then((data) => {
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-        console.log(data.error);
-      } else {
-        console.log('enter authentication');
-        authenticate(data, () => {
-          setValues({
-            ...values,
-            redirectToHome: true,
-          });
-          console.log('success');
-        });
-      }
-    });
-  };
-
-  const loginForm = () => (
-    <Grid container component='main' className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              id='username'
-              label='Username'
-              name='username'
-              autoComplete='username'
-              autoFocus
-              onChange={handleChange('username')}
-            />
-            <TextField
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              onChange={handleChange('password')}
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Button
-              fullWidth
-              variant='contained'
-              color='primary'
-              onClick={clickSubmit}
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                Forgot password?
+  if (props.authenticated === true) {
+    return <Redirect to='/home' />;
+  } else
+    return (
+      <Grid container component='main' className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component='h1' variant='h5'>
+              Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant='outlined'
+                margin='normal'
+                required
+                fullWidth
+                id='username'
+                label='Username'
+                name='username'
+                autoComplete='username'
+                autoFocus
+                onChange={handleChange('username')}
+              />
+              <TextField
+                variant='outlined'
+                margin='normal'
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
+                onChange={handleChange('password')}
+              />
+              <FormControlLabel
+                control={<Checkbox value='remember' color='primary' />}
+                label='Remember me'
+              />
+              <Button
+                fullWidth
+                variant='contained'
+                color='primary'
+                onClick={onSubmit}
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  Forgot password?
+                </Grid>
+                <Link to='/signup'>
+                  <Grid item>{"Don't have an account? Sign Up"}</Grid>
+                </Link>
               </Grid>
-              <Link to='/signup'>
-                <Grid item>{"Don't have an account? Sign Up"}</Grid>
-              </Link>
-            </Grid>
-            <Box mt={5}>
-              <div className='auth-button'>
-                <LinkAuth href='/auth/google'>
-                  <img src={googleImg} />
-                </LinkAuth>
-              </div>
-            </Box>
-          </form>
-        </div>
+              <Box mt={5}>
+                <div className='auth-button'>
+                  <LinkAuth href='/auth/google'>
+                    <img src={googleImg} />
+                  </LinkAuth>
+                </div>
+              </Box>
+            </form>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
-  );
-
-  const redirectUser = () => {
-    if (redirectToHome) {
-      return <Redirect to='/home' />;
-    } else {
-      return <Redirect to='/' />;
-    }
-  };
-
-  return (
-    <React.Fragment>
-      {loginForm()}
-      {redirectUser()}
-    </React.Fragment>
-  );
+    );
 };
 export default Login;

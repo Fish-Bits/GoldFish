@@ -12,6 +12,8 @@ const authRoutes = require('./routes/auth-routes');
 const userSignUpRoute = require('./routes/userSignupRoute');
 const eventsRouter = require('./routes/eventsRouter.js');
 
+const usersControllers = require('./controllers/usersControllers');
+
 //App
 const app = express();
 
@@ -41,9 +43,7 @@ app.get('/', (req, res) => {
 // app.get('/login', function (req, res) {
 //   res.sendFile(path.join(__dirname, '../index.html'));
 // });
-app.get('/home', function (req, res) {
-  res.sendFile(path.join(__dirname, '../index.html'));
-});
+app.get('/home', usersControllers.isAuth);
 
 //Routes
 app.use('/events', eventsRouter);
