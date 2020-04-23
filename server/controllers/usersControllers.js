@@ -14,7 +14,7 @@ usersControllers.createUser = (req, res, next) => {
       console.log(hashedPassword);
       hashed_password = hashedPassword;
       const query = `INSERT INTO users (username, password) VALUES ($1, $2)`;
-      db.query(query, [username, password]).then((user) => {
+      db.query(query, [username, hashed_password]).then((user) => {
         res.locals.user = user;
       });
       return res.json({
@@ -35,16 +35,13 @@ usersControllers.verifyUser = (req, res, next) => {
   db.query(query, [req.body.username])
     .then((result) => {
       const user = result.rows[0];
-      res.locals.username = user.username;
-      res.locals.userId = user.id;
       res.locals.user = user
-      const hash = bcrypt.hashSync(req.body.password, SALT_WORK_FACTOR);
-      bcrypt.compare(req.body.password, hash).then((passwordCorrect) => {
+      bcrypt.compare(req.body.password, user.password).then((passwordCorrect) => {
         if (passwordCorrect) {
+          console.log('passwordCorrect', passwordCorrect)
           res.locals.token = jwt.sign(res.locals.user, process.env.TOKEN_SECRET, { expiresIn: '120s' })
-          console.log(res.locals.token)
           return next();
-        } else return res.status(401).json({ success: false });
+        } else return console.log('rejected'); res.status(401).json({ success: false });
       });
     })
     .catch((err) =>
