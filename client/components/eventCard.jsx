@@ -23,6 +23,7 @@ import bri from "../assets/bri.jpg";
 import noimage from "../assets/noimage.jpg";
 import ChatWindow2 from "../containers/chatWindow2";
 import CounterButton from "./counterButton";
+import * as actions from '../actions/actions'
 
 const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 const useStyles = makeStyles(theme => ({
@@ -52,34 +53,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  comments: state.comments.comments
 });
+
+const mapDispatchToProps = dispatch => ({
+  getComments: id => dispatch(actions.getComments(id))
+})
 
 const EventCard = props => {
   const { name, date, description, location, image, id } = props;
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [messages, setMessages] = useState({});
-
+  const [messages, setMessages] = useState();
+  //bring in comments as props
+  
   const handleExpandClick = () => {
-    getMessages();
+    //call action to request comments here
+    props.getComments(id)
+    //get a not current username
     setExpanded(!expanded);
   };
   const imgArr = [party, python, bri, math, noimage, noimage, noimage];
-  // console.log(props.id)
-  const getMessages = () => {
-    axios
-      .get(`/events/${id}/comment`)
-      .then(res => {
-        console.log("axios get", res);
-        console.log(res.data);
-        console.log(messages);
-        const message = res.data;
-        console.log(messages);
-      })
-      .catch(error => console.log(error));
-  };
-
+ 
   return (
     <Grid item md={3}>
       <Card elevation={3} className={classes.root}>
@@ -142,7 +138,7 @@ const EventCard = props => {
         <Collapse in={expanded} timeout="auto">
           <CardContent>
             <div className="App">
-              <ChatWindow2 currentUser={props.currentUser} eventId={id} />
+              <ChatWindow2 currentUser={props.currentUser} comments={props.comments} />
             </div>
           </CardContent>
         </Collapse>
@@ -164,4 +160,4 @@ const EventCard = props => {
   );
 };
 
-export default connect(mapStateToProps, null)(EventCard);
+export default connect(mapStateToProps, mapDispatchToProps)(EventCard);

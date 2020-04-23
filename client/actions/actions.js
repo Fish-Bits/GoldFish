@@ -17,19 +17,20 @@ export const login = user => {
     })
       .then(response => response.json())
       .then(result => {
-        const currentUser = {
-          username: result.username,
-          userId: result.userId
-        };
-        localStorage.setItem("token", result.token);
-        dispatch({
-          type: types.LOGIN,
-          payload: currentUser
-        });
         if (result && result.success) {
-          console.log("success");
+          const currentUser = {
+            username: result.username,
+            userId: result.userId
+          };
+          localStorage.setItem("token", result.token);
+          dispatch({
+            type: types.LOGIN,
+            payload: currentUser
+          });
+        } else {
+          console.log('you are not a user')
         }
-      });
+     });
   };
 };
 
@@ -43,3 +44,18 @@ export const getUser = () => {
     });
   };
 };
+
+export const getComments = (eventId) => {
+  return dispatch => {
+      axios
+        .get(`/events/${eventId}/comment`)
+        .then(res => {
+          console.log("axios get response", res);
+          dispatch({
+            type: types.GET_COMMENTS,
+            payload: res.data
+          })
+        })
+        .catch(error => console.log(error));
+    };
+}
