@@ -58,7 +58,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getComments: id => dispatch(actions.getComments(id))
+  getComments: id => dispatch(actions.getComments(id)),
+  addComments: (id,body) => dispatch(actions.addComments(id,body))
 })
 
 const EventCard = props => {
@@ -138,7 +139,7 @@ const EventCard = props => {
         <Collapse in={expanded} timeout="auto">
           <CardContent>
             <div className="App">
-              <ChatWindow2 currentUser={props.currentUser} comments={props.comments} />
+              <ChatWindow2 addComments={props.addComments} currentUser={props.currentUser} comments={props.comments} eventId={id}/>
             </div>
           </CardContent>
         </Collapse>

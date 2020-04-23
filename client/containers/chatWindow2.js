@@ -37,15 +37,21 @@ const useStyles = makeStyles(theme => ({
 export default function chatWindow2(props) {
   const classes = useStyles();
 
-  const [chat, changeTextValue] = React.useState({
-    textValue: "",
-    messages: [{ from: "Brianna", msg: " hello" }]
-  });
+  // const [chat, changeTextValue] = React.useState({
+  //   textValue: "",
+  //   messages: [{ from: "Brianna", msg: " hello" }]
+  // });
+  const [chat, changeTextValue] = React.useState('')
 
-  const handleMessageSend = () => {
-    chat.messages.push({ from: "Sieun", msg: chat.textValue });
+// const handleMessageSend = () => {
+  
+// }
 
-    changeTextValue({ ...chat, textValue: "" });
+  const handleSubmit = (e) => {
+    // chat.messages.push({ from: "Sieun", msg: chat.textValue });
+    e.preventDefault()
+    props.addComments(props.eventId, {userId: props.currentUser.userId, comment: chat})
+    changeTextValue('')
   };
 
   return (
@@ -74,7 +80,7 @@ export default function chatWindow2(props) {
           rowsMax={4}
           value={chat.textValue}
           onChange={e => {
-            changeTextValue({ ...chat, textValue: e.target.value });
+            changeTextValue(e.target.value );
           }}
         />
         <br></br>
@@ -82,7 +88,7 @@ export default function chatWindow2(props) {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => handleMessageSend()}
+          onClick={handleSubmit}
         >
           Send
         </Button>

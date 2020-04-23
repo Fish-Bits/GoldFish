@@ -59,3 +59,17 @@ export const getComments = (eventId) => {
         .catch(error => console.log(error));
     };
 }
+
+export const addComments = (eventId, body) => {
+  return dispatch => {
+    axios
+    .post(`/events/${eventId}/comment`,body)
+    .then(res => {
+      console.log('axios post comment', res)
+      dispatch({
+        type: types.ADD_COMMENTS
+      })
+    })
+    .catch(error => console.log(error));
+  }
+}
