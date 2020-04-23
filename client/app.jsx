@@ -10,15 +10,15 @@ import * as actions from './actions/actions'
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
+  currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch(actions.getUser())
+  getUser: () => dispatch(actions.getUser()),
+  login: (user) => dispatch(actions.login(user))
 })
 
-
-
-const App = ({ getUser, authenticated }) => {
+const App = ({ getUser, authenticated, currentUser, login }) => {
   useEffect(() => {
     getUser();
   })
@@ -29,11 +29,11 @@ const App = ({ getUser, authenticated }) => {
           authenticated={authenticated}
           exact
           path='/home'
-          render={() => <EventsPage />}
+          render={() => <EventsPage currentUser={currentUser}/>}
         />
-        <Route exact path='/' component={Login} />
+        <Route exact path='/' render={() => <Login login={login}/>} />
         <Route exact path='/signup' component={Signup} />
-        <Route exact path='/create' component={CreateEvent} />
+        <Route exact path='/create' render={() => <CreateEvent currentUser={currentUser}/>}/>
       </Switch>
     </>
   );

@@ -50,32 +50,17 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const classes = useStyles();
-  const doLogin = () => {
-    if (!values.username) return;
-    if (!values.password) return;
-    fetch('/auth/login', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result && result.success) {
-          console.log('success');
-        }
-      });
-  };
 
   const [values, setValues] = React.useState({
     username: '',
     password: '',
   });
+  
+  const onSubmit = () => {
+    if (!values.username) return;
+    if (!values.password) return;
+    props.login(values)
+  }
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -126,7 +111,7 @@ const Login = (props) => {
               fullWidth
               variant='contained'
               color='primary'
-              onClick={doLogin}
+              onClick={onSubmit}
               className={classes.submit}
             >
               Sign In
