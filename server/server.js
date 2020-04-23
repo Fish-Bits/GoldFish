@@ -3,6 +3,7 @@ const path = require('path');
 const port = 3000;
 const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const cookieSession = require('cookie-session');
 require('dotenv').config();
@@ -10,6 +11,8 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth-routes');
 const userSignUpRoute = require('./routes/userSignupRoute');
 const eventsRouter = require('./routes/eventsRouter.js');
+
+const usersControllers = require('./controllers/usersControllers');
 
 //App
 const app = express();
@@ -23,6 +26,7 @@ app.use(
     keys: [process.env.COOKIEKEY],
   })
 );
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -32,7 +36,6 @@ app.get('/', (req, res) => {
 });
 
 //Below are hardcoded features
-app.use('/auth', authRoutes);
 // app.get('/create', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../index.html'));
 // });
@@ -40,13 +43,12 @@ app.use('/auth', authRoutes);
 // app.get('/login', function (req, res) {
 //   res.sendFile(path.join(__dirname, '../index.html'));
 // });
-app.get('/home', function (req, res) {
-  res.sendFile(path.join(__dirname, '../index.html'));
-});
+app.get('/home', usersControllers.isAuth);
 
 //Routes
 app.use('/events', eventsRouter);
 app.use('/', userSignUpRoute);
+app.use('/auth', authRoutes);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
