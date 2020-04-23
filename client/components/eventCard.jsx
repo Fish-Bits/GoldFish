@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -57,13 +58,28 @@ const mapStateToProps = state => ({
 const EventCard = props => {
   const { name, date, description, location, image, id } = props;
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [messages, setMessages] = useState({});
 
   const handleExpandClick = () => {
+    getMessages();
     setExpanded(!expanded);
   };
   const imgArr = [party, python, bri, math, noimage, noimage, noimage];
   // console.log(props.id)
+  const getMessages = () => {
+    axios
+      .get(`/events/${id}/comment`)
+      .then(res => {
+        console.log("axios get", res);
+        console.log(res.data);
+        console.log(messages);
+        const message = res.data;
+        console.log(messages);
+      })
+      .catch(error => console.log(error));
+  };
+
   return (
     <Grid item md={3}>
       <Card elevation={3} className={classes.root}>
