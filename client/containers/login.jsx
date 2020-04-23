@@ -65,6 +65,7 @@ const Login = props => {
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
   };
+  
   if (props.authenticated === true) {
     return <Redirect to="/home" />;
   } else

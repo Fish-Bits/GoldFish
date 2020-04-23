@@ -93,10 +93,17 @@ eventsControllers.updatePost = async (req, res, next) => {
 eventsControllers.getComment = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const text = `SELECT * FROM comments WHERE id = $1`;
+
+    const text = `
+    SELECT comments.comment, comments.user_id, users.username FROM comments
+    JOIN users
+    ON comments.user_id = users.id
+    JOIN events ON events.id = comments.event_id
+    WHERE events.id = $1
+    `;
     const params = [id];
     const result = await db.query(text, params);
-    res.locals.getComment = result.rows[0];
+    res.locals.getComment = result.rows;
     next();
   } catch (err) {
     next({
