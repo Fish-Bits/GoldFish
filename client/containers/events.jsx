@@ -34,7 +34,7 @@ class Events extends Component {
           return (
             <EventCard
               key={i}
-              id={i}
+              id={event.id}
               name={event.name}
               location={event.location}
               date={event.date.substring(0, 10)}

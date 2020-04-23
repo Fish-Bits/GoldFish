@@ -19,12 +19,10 @@ export const login = (user) => {
       .then((response) => response.json())
       .then((result) => {
         if (result && result.success) {
-          console.log(result);
           const currentUser = {
             username: result.username,
             userId: result.userId,
           };
-          console.log('storing token');
           localStorage.setItem('token', result.token);
           dispatch({
             type: types.LOGIN,
@@ -45,5 +43,34 @@ export const getUser = () => {
       type: types.GET_USER,
       //user data//add payload
     });
+  };
+};
+
+export const getComments = (eventId) => {
+  return (dispatch) => {
+    axios
+      .get(`/events/${eventId}/comment`)
+      .then((res) => {
+        console.log('axios get response', res);
+        dispatch({
+          type: types.GET_COMMENTS,
+          payload: res.data,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const addComments = (eventId, body) => {
+  return (dispatch) => {
+    axios
+      .post(`/events/${eventId}/comment`, body)
+      .then((res) => {
+        console.log('axios post comment', res);
+        dispatch({
+          type: types.ADD_COMMENTS,
+        });
+      })
+      .catch((error) => console.log(error));
   };
 };
