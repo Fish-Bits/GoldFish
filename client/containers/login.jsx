@@ -13,7 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import googleImg from '../assets/google.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { login, authenticate, isAuthenticated } from '../auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,38 +51,44 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const classes = useStyles();
-  const doLogin = () => {
-    if (!values.username) return;
-    if (!values.password) return;
-    fetch('/auth/login', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result && result.success) {
-          console.log('success');
-        }
-      });
-  };
 
   const [values, setValues] = React.useState({
     username: '',
     password: '',
+    error: '',
+    redirectToHome: false,
   });
+
+  const { username, password, error, redirectToHome } = values;
+  const { user } = isAuthenticated();
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  return (
+  const clickSubmit = (event) => {
+    event.preventDefault();
+    console.log('clicked submit');
+    setValues({ ...values, error: false });
+    console.log(values);
+    login({ username, password }).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+        console.log(data.error);
+      } else {
+        console.log('enter authentication');
+        authenticate(data, () => {
+          setValues({
+            ...values,
+            redirectToHome: true,
+          });
+          console.log('success');
+        });
+      }
+    });
+  };
+
+  const loginForm = () => (
     <Grid container component='main' className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -126,7 +133,7 @@ const Login = (props) => {
               fullWidth
               variant='contained'
               color='primary'
-              onClick={doLogin}
+              onClick={clickSubmit}
               className={classes.submit}
             >
               Sign In
@@ -150,6 +157,21 @@ const Login = (props) => {
         </div>
       </Grid>
     </Grid>
+  );
+
+  const redirectUser = () => {
+    if (redirectToHome) {
+      return <Redirect to='/home' />;
+    } else {
+      return <Redirect to='/' />;
+    }
+  };
+
+  return (
+    <React.Fragment>
+      {loginForm()}
+      {redirectUser()}
+    </React.Fragment>
   );
 };
 export default Login;

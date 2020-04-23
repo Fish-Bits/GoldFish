@@ -34,7 +34,6 @@ app.get('/', (req, res) => {
 });
 
 //Below are hardcoded features
-app.use('/auth', authRoutes);
 // app.get('/create', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../index.html'));
 // });
@@ -49,7 +48,7 @@ app.get('/home', function (req, res) {
 //Routes
 app.use('/events', eventsRouter);
 app.use('/', userSignUpRoute);
-// app.use('/', //INSERT LOGIN ROUTE)
+app.use('/auth', authRoutes);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
