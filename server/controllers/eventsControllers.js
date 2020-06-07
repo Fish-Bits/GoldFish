@@ -2,10 +2,9 @@ const db = require('../models/eventsModels.js');
 
 const eventsControllers = {};
 
-
 eventsControllers.getEvents = async (req, res, next) => {
   const events = [];
-  try{
+  try {
     const text = `SELECT * FROM events`;
     const result = await db.query(text);
 
@@ -18,20 +17,18 @@ eventsControllers.getEvents = async (req, res, next) => {
         FROM participants 
         WHERE event_id = $1
       `;
-      const params = [ event.id ]
+      const params = [event.id];
       const result2 = await db.query(text2, params);
 
-      event.participants = [ ...result2.rows ];
+      event.participants = [...result2.rows];
       events.push(event);
     }
     res.locals.events = events;
     next();
-  }
-  
-  catch(err){
+  } catch (err) {
     next({
       log: `eventsControllers.getEvents: error: ${err}`,
-      message: { err: `Error in eventsControllers.getEvents: ${err}`}
+      message: { err: `Error in eventsControllers.getEvents: ${err}` },
     });
   }
 };
@@ -44,33 +41,32 @@ eventsControllers.getDetails = async (req, res, next) => {
     const result = await db.query(text, params);
     res.locals.details = result.rows;
     next();
-  }
-  catch(err){
+  } catch (err) {
     next({
       log: `eventsControllers.getDetails: error: ${err}`,
-      message: { err: `Error in eventsControllers.getDetails: ${err}`}
+      message: { err: `Error in eventsControllers.getDetails: ${err}` },
     });
   }
 };
 
 eventsControllers.createPost = async (req, res, next) => {
-  console.log('req.body',req.body)
+  // console.log('req.body', req.body);
   const { name, location, date, description } = req.body;
-  console.log('WE ARE TESTING')
-  const user_id = 1;
-  
+  // console.log('WE ARE TESTING', req.body.date);
+  const user_id = req.params.id;
+  // console.log('id', user_id)
+
   try {
-    const text = `INSERT INTO events (name, location, date, description, user_id) VALUES ($1, $2, $3, $4, $5)`;
+    const text = `INSERT INTO events (name, location, date, description, user_id) VALUES ($1, $2, CAST($3 AS DATE), $4, $5)`;
     const body = [name, location, date, description, user_id];
     const result = await db.query(text, body);
     res.locals.createPost = result.rows;
     next();
-  }
-  
-  catch(err){
+  } catch (err) {
+    console.log(err)
     next({
       log: `eventsControllers.createPosterror: ${err}`,
-      message: { err: `Error in eventsControllers.createPost${err}`}
+      message: { err: `Error in eventsControllers.createPost${err}` },
     });
   }
 };
@@ -80,17 +76,16 @@ eventsControllers.updatePost = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const text = 'UPDATE events SET name = $1, location = $2, date = $3, description = $4, user_id = $5 WHERE id = $6';
+    const text =
+      'UPDATE events SET name = $1, location = $2, date = $3, description = $4, user_id = $5 WHERE id = $6';
     const body = [name, location, date, description, user_id, id];
     const result = await db.query(text, body);
     res.locals.updatePost = result.rows;
     next();
-  }
-  
-  catch(err){
+  } catch (err) {
     next({
       log: `eventsControllers.updatePost: error: ${err}`,
-      message: { err: `Error in eventsControllers.updatePost: ${err}`}
+      message: { err: `Error in eventsControllers.updatePost: ${err}` },
     });
   }
 };
@@ -98,54 +93,59 @@ eventsControllers.updatePost = async (req, res, next) => {
 eventsControllers.getComment = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const text = `SELECT * FROM comments WHERE id = $1`;
+
+    const text = `
+    SELECT comments.comment, comments.user_id, users.username FROM comments
+    JOIN users
+    ON comments.user_id = users.id
+    JOIN events ON events.id = comments.event_id
+    WHERE events.id = $1
+    `;
     const params = [id];
     const result = await db.query(text, params);
-    res.locals.getComment = result.rows[0];
+    res.locals.getComment = result.rows;
     next();
-  }
-  catch(err){
+  } catch (err) {
     next({
       log: `eventsControllers.getComment: error: ${err}`,
-      message: { err: `Error in eventsControllers.getComment: ${err}`}
+      message: { err: `Error in eventsControllers.getComment: ${err}` },
     });
   }
-}
+};
 
 eventsControllers.createComment = async (req, res, next) => {
-  const { user_id, comment } = req.body;
+  const { userId, comment } = req.body;
+  console.log(req.body)
   const { id } = req.params;
+  console.log(req.params)
   try {
     const text = `INSERT INTO comments (user_id, event_id, comment) VALUES ($1, $2, $3)`;
-    const params = [user_id, id, comment]
+    const params = [userId, id, comment];
     const result = await db.query(text, params);
     res.locals.createComment = result.rows;
     next();
-  }
-  catch(err) {
+  } catch (err) {
     next({
       log: `events.Controller.createComment: error: ${err}`,
-      message: { err: `Error in eventsControllers.createComment: ${err}`}
-    })
+      message: { err: `Error in eventsControllers.createComment: ${err}` },
+    });
   }
-}
+};
 
 eventsControllers.deletePost = async (req, res, next) => {
-  const { id } = req.params
-  try{
+  const { id } = req.params;
+  try {
     const text = `DELETE FROM events WHERE id = $1`;
     const params = [id];
     const result = await db.query(text, params);
     res.locals.deletePost = result.rows;
     next();
-  }
-  
-  catch(err){
+  } catch (err) {
     next({
       log: `eventsControllers.deletePost: error: ${err}`,
-      message: { err: `Error in eventsControllers.deletePost: ${err}`}
+      message: { err: `Error in eventsControllers.deletePost: ${err}` },
     });
   }
 };
 
-module.exports = eventsControllers
+module.exports = eventsControllers;

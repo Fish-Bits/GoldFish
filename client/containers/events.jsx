@@ -4,7 +4,7 @@ import EventCard from '../components/eventCard.jsx';
 const axios = require('axios');
 
 const styles = {
-  Paper: {padding:20, marginTop: 10, marginBottom: 10},
+  Paper: { padding: 20, marginTop: 10, marginBottom: 10 },
 }
 class Events extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Events extends Component {
   }
 
   deleteEvent(id) {
-    axios.delete('/events'+id)
+    axios.delete('/events' + id)
     this.setState({
       events: this.state.events.filter(el => el.id !== id)
     })
@@ -32,15 +32,15 @@ class Events extends Component {
       <Grid container spacing={2}>
         {this.state.events.map((event, i) => {
           return (
-              <EventCard
-                key={i}
-                id={i}
-                name={event.name}
-                location={event.location}
-                date={event.date.substring(0,10)}
-                description={event.description}
-                deleteEvent={this.deleteEvent}
-              />
+            <EventCard
+              key={i}
+              id={event.id}
+              name={event.name}
+              location={event.location}
+              date={event.date.substring(0, 10)}
+              description={event.description}
+              deleteEvent={this.deleteEvent}
+            />
           );
         })}
       </Grid>

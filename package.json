@@ -5,9 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/server.js",
     "build": "webpack",
-    "dev": " nodemon server/index.js & webpack-dev-server --open"
+    "dev": " nodemon server/server.js & webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,14 @@
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "bootstrap": "^4.4.1",
+    "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^8.5.1",
     "material-ui-core": "^5.0.1",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
@@ -39,7 +43,11 @@
     "react-chat-window": "^1.2.1",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
